@@ -1,7 +1,12 @@
 #include "doubly_linked_list.h"
 
-#include <stdio.h>
-#include <stdlib.h>
+char *int_to_string(void *data)
+{
+    int *a = data;
+    char *str = malloc(10);
+    sprintf(str, "%d", *a);
+    return str;
+}
 
 int main()
 {
@@ -16,10 +21,17 @@ int main()
     dll_push_back(dll, a);
     dll_push_back(dll, b);
 
-    for (dll_node_t *node = dll->head; node != NULL; node = node->next)
-    {
-        printf("%d\n", *((int*)node->data));
-    }
+    puts("List:");
+    dll_print(dll, stdout, int_to_string);
+    fflush(stdout);
+
+    free(dll_pop_front(dll));
+    puts("after pop front");
+    dll_print(dll, stdout, int_to_string);
+
+    free(dll_pop_back(dll));
+    puts("After pop back");
+    dll_print(dll, stdout, int_to_string);
 
     dll_free(dll);
 
