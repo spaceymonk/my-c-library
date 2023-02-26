@@ -194,6 +194,38 @@ void *dll_remove(dll_t *self, size_t index)
     return data;
 }
 
+void *dll_get(dll_t *self, size_t index)
+{
+    if (index >= self->size)
+    {
+        fprintf(stderr, "dll_get: index out of bounds");
+        return NULL;
+    }
+    dll_node_t *node = self->head;
+    for (size_t i = 0; i < index; i++)
+    {
+        node = node->next;
+    }
+    return node->data;
+}
+
+void *dll_set(dll_t *self, void *data, size_t index)
+{
+    if (index >= self->size)
+    {
+        fprintf(stderr, "dll_set: index out of bounds");
+        return NULL;
+    }
+    dll_node_t *node = self->head;
+    for (size_t i = 0; i < index; i++)
+    {
+        node = node->next;
+    }
+    void *old_data = node->data;
+    node->data = data;
+    return old_data;
+}
+
 void dll_clear(dll_t *self, void (*free_handler)(void *))
 {
     if (free_handler == NULL)
