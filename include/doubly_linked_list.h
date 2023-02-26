@@ -12,6 +12,7 @@
 #ifndef DOUBLE_LINKED_LIST_H
 #define DOUBLE_LINKED_LIST_H
 
+#include<stdio.h>
 #include <stdlib.h>
 
 /**
@@ -59,6 +60,21 @@ dll_t *dll_new();
 int dll_free(dll_t *self);
 
 /**
+ * @brief Prints the list to given file descriptor
+ *
+ * @param self The list to print
+ * @param fd The file descriptor to print to
+ * @param to_string A function that converts the data to string
+ *                 to be printed. This function should return
+ *                 a pointer to a string that is allocated on
+ *                 the heap. The `dll_print` function will free
+ *                 the string after printing it.
+ * 
+ * @return void
+ */
+void dll_print(dll_t *self, FILE *fd, char *(*to_string)(void *));
+
+/**
  * @brief Pushes data to the back of the list
  *
  * @param self  The list to push to
@@ -83,16 +99,24 @@ void *dll_push_front(dll_t *self, void *data);
  *
  * @param self  The list to pop from
  *
- * @return The data that was popped
+ * @note If the list is empty this function will
+ *      return NULL and print an error message to
+ *      stderr.
+ *
+ * @return The data that was popped,
+ *        NULL if the list is empty
  */
 void *dll_pop_back(dll_t *self);
 
 /**
  * @brief Pops the first element of the list
  *
- * @param self  The list to pop from
+ * @note If the list is empty this function will
+ *      return NULL and print an error message to
+ *      stderr.
  *
- * @return The data that was popped
+ * @return The data that was popped,
+ *        NULL if the list is empty
  */
 void *dll_pop_front(dll_t *self);
 
