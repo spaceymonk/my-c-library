@@ -41,3 +41,9 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 clean:
 	rm -rf $(OBJ_DIR) $(BIN_DIR)
+
+# Test against memory leaks with valgrind
+.PHONY: test
+
+test: $(BIN)
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose $(BIN)
