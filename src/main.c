@@ -1,4 +1,5 @@
 #include "../include/doubly_linked_list.h"
+#include "../include/dynamic_array.h"
 
 char *int_to_string(void *data)
 {
@@ -18,39 +19,32 @@ int int_compare(void *a, void *b)
 int main()
 {
 
-    dll_t *dll = dll_new();
+    da_t *da = da_new(1);
 
     int a = 1;
     int b = 2;
     int c = 3;
     int d = 4;
-    int f = 2;
+    int f = 3;
 
-    dll_insert_after(dll, dll->head, &a);
-    dll_insert_after(dll, dll->head, &b);
-    dll_insert_after(dll, dll->head, &c);
-    dll_insert_after(dll, dll->head, &d);
-    dll_print(dll, stdout, int_to_string);
+    da_push_back(da, &a);
+    da_push_back(da, &b);
+    da_push_back(da, &c);
+    da_push_back(da, &d);
+
+    da_print(da, stdout, int_to_string);
     fflush(stdout);
 
-    dll_sort(dll, int_compare);
-    dll_reverse(dll);
-    dll_print(dll, stdout, int_to_string);
+    size_t x = da_search(da, &f, int_compare);
+    printf("x = %zu\n", x);
+
+    da_remove(da, x);
+    da_print(da, stdout, int_to_string);
     fflush(stdout);
 
-    dll_node_t *found = dll_search(dll, &f, int_compare);
-    if (found)
-    {
-        dll_remove(dll, found);
-    }
-    else
-    {
-        printf("Not found\n");
-    }
-    dll_print(dll, stdout, int_to_string);
 
-    dll_clear(dll, NULL);
-    dll_free(dll);
+    da_clear(da, NULL);
+    da_free(da);
 
     return 0;
 }

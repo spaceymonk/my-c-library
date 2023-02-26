@@ -33,7 +33,7 @@ int dll_free(dll_t *dll)
 {
     if (dll == NULL)
     {
-        fprintf(stderr, "dll_free: list is NULL\n");
+        fprintf(stderr, "dll_free: given parameter NULL\n");
         return 1;
     }
     if (dll->size != 0)
@@ -47,6 +47,11 @@ int dll_free(dll_t *dll)
 
 int dll_print(dll_t *self, FILE *fd, char *(*to_string)(void *))
 {
+    if (self == NULL)
+    {
+        fprintf(stderr, "dll_print: given parameter is NULL\n");
+        return 1;
+    }
     size_t written_bytes = fwrite("[", 1, 1, fd);
     if (written_bytes != 1)
     {
@@ -79,10 +84,16 @@ int dll_print(dll_t *self, FILE *fd, char *(*to_string)(void *))
         fprintf(stderr, "dll_print: fwrite failed\n");
         return 1;
     }
+    return 0;
 }
 
 void *dll_push_back(dll_t *self, void *data)
 {
+    if (self == NULL)
+    {
+        fprintf(stderr, "dll_push_back: given parameter is NULL\n");
+        return NULL;
+    }
     dll_node_t *node = malloc(sizeof(dll_node_t));
     if (node == NULL)
     {
@@ -107,6 +118,11 @@ void *dll_push_back(dll_t *self, void *data)
 
 void *dll_push_front(dll_t *self, void *data)
 {
+    if (self == NULL)
+    {
+        fprintf(stderr, "dll_push_front: given parameter is NULL\n");
+        return NULL;
+    }
     dll_node_t *node = malloc(sizeof(dll_node_t));
     if (node == NULL)
     {
@@ -131,6 +147,11 @@ void *dll_push_front(dll_t *self, void *data)
 
 void *dll_pop_back(dll_t *self)
 {
+    if (self == NULL)
+    {
+        fprintf(stderr, "dll_pop_back: given parameter is NULL\n");
+        return NULL;
+    }
     if (self->tail == NULL)
     {
         fprintf(stderr, "dll_pop_back: list is empty\n");
@@ -154,6 +175,11 @@ void *dll_pop_back(dll_t *self)
 
 void *dll_pop_front(dll_t *self)
 {
+    if (self == NULL)
+    {
+        fprintf(stderr, "dll_pop_front: given parameter is NULL\n");
+        return NULL;
+    }
     if (self->head == NULL)
     {
         fprintf(stderr, "dll_pop_front: list is empty\n");
@@ -177,6 +203,11 @@ void *dll_pop_front(dll_t *self)
 
 dll_node_t *dll_insert_after(dll_t *self, dll_node_t *node, void *data)
 {
+    if (self == NULL)
+    {
+        fprintf(stderr, "dll_insert_after: given parameter is NULL\n");
+        return NULL;
+    }
     if (node == NULL)
     {
         if (self->size == 0)
@@ -211,6 +242,11 @@ dll_node_t *dll_insert_after(dll_t *self, dll_node_t *node, void *data)
 
 dll_node_t *dll_insert_before(dll_t *self, dll_node_t *node, void *data)
 {
+    if (self == NULL)
+    {
+        fprintf(stderr, "dll_insert_before: given parameter is NULL\n");
+        return NULL;
+    }
     if (node == NULL)
     {
         if (self->size == 0)
@@ -245,6 +281,11 @@ dll_node_t *dll_insert_before(dll_t *self, dll_node_t *node, void *data)
 
 void *dll_remove(dll_t *self, dll_node_t *node)
 {
+    if (self == NULL)
+    {
+        fprintf(stderr, "dll_remove: given parameter is NULL\n");
+        return NULL;
+    }
     if (node == NULL)
     {
         fprintf(stderr, "dll_remove: node is NULL\n");
@@ -279,6 +320,11 @@ void *dll_remove(dll_t *self, dll_node_t *node)
 
 dll_node_t *dll_search(dll_t *self, void *data, int (*cmp)(void *, void *))
 {
+    if (self == NULL)
+    {
+        fprintf(stderr, "dll_search: given parameter is NULL\n");
+        return NULL;
+    }
     dll_node_t *node = self->head;
     while (node != NULL)
     {
@@ -293,6 +339,11 @@ dll_node_t *dll_search(dll_t *self, void *data, int (*cmp)(void *, void *))
 
 void dll_clear(dll_t *self, void (*free_handler)(void *))
 {
+    if (self == NULL)
+    {
+        fprintf(stderr, "dll_clear: given parameter is NULL\n");
+        return;
+    }
     if (free_handler == NULL)
     {
         dll_node_t *node = self->head;
@@ -314,6 +365,8 @@ void dll_clear(dll_t *self, void (*free_handler)(void *))
             node = next;
         }
     }
+    self->head = NULL;
+    self->tail = NULL;
     self->size = 0;
 }
 

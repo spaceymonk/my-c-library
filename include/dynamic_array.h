@@ -12,9 +12,12 @@
 #ifndef DYNAMIC_ARRAY_H
 #define DYNAMIC_ARRAY_H
 
-/* ================================================================================================================== */
-/*                                                  TYPE DEFINITIONS                                                  */
-/* ================================================================================================================== */
+#include <stdio.h>
+#include <stdlib.h>
+
+/* ========================================================================== */
+/*                              TYPE DEFINITIONS                              */
+/* ========================================================================== */
 
 /**
  * @brief A dynamic array structure
@@ -28,7 +31,7 @@
  */
 typedef struct da
 {
-    void *array;
+    void **array;
     size_t size;
     size_t capacity;
 } da_t;
@@ -51,6 +54,9 @@ da_t *da_new(size_t capacity);
  * @brief Free the dynamic array
  *
  * @param self  The dynamic array
+ * 
+ * @attention  This function does not free the data in the array. It only frees
+ *           the array itself.
  *
  * @return        operation status
  * @retval 0      If the operation was successful
@@ -104,8 +110,8 @@ void *da_get(da_t *self, size_t index);
 void *da_remove(da_t *self, size_t index);
 
 /**
- * @brief Clears the array and frees all nodes by
- *       calling the free function on the data
+ * @brief Clears the array and calls the free function on
+ *       the data, if provided
  *
  * @param self          The list to clear
  * @param free_handler  The function to free the data. This
@@ -114,9 +120,11 @@ void *da_remove(da_t *self, size_t index);
  *                     make sure that the data is freed
  *                     before the list is freed.
  *
- * @return void
+ * @return       operation status
+ * @retval 0     If the operation was successful
+ * @retval -1    If the operation failed
  */
-void da_clear(dll_t *self, void (*free_handler)(void *));
+int da_clear(da_t *self, void (*free_handler)(void *));
 
 /**
  * @brief Inserts an element at the given index
@@ -205,6 +213,6 @@ da_t *da_shrink(da_t *self);
  * @retval 1, If an error occurred
  * @retval 0, If the list is printed successfully
  */
-int dll_print(dll_t *self, FILE *fd, char *(*to_string)(void *));
+int da_print(da_t *self, FILE *fd, char *(*to_string)(void *));
 
 #endif
