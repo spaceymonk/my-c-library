@@ -121,13 +121,18 @@ void *dll_pop_back(dll_t *self);
 void *dll_pop_front(dll_t *self);
 
 /**
- * @brief Inserts data at the given index
+ * @brief Inserts data after the given index
  *
  * @param self   The list to insert into
  * @param data   The data to insert
  * @param index  The index to insert at
+ * 
+ * @note If the index is out of bounds this function
+ *      will return NULL and print an error message to
+ *      stderr.
  *
- * @return The data that was inserted
+ * @return The data that was inserted,
+ *        NULL if the index is out of bounds
  */
 void *dll_insert(dll_t *self, void *data, size_t index);
 

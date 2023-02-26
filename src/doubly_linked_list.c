@@ -17,7 +17,7 @@
 
 dll_t *dll_new()
 {
-    dll_t *dll = (dll_t *)malloc(sizeof(dll_t));
+    dll_t *dll = malloc(sizeof(dll_t));
     dll->head = NULL;
     dll->tail = NULL;
     dll->size = 0;
@@ -53,7 +53,7 @@ void dll_print(dll_t *self, FILE *fd, char *(*to_string)(void *))
 
 void *dll_push_back(dll_t *self, void *data)
 {
-    dll_node_t *node = (dll_node_t *)malloc(sizeof(dll_node_t));
+    dll_node_t *node = malloc(sizeof(dll_node_t));
     node->data = data;
     node->next = NULL;
     node->prev = self->tail;
@@ -72,7 +72,7 @@ void *dll_push_back(dll_t *self, void *data)
 
 void *dll_push_front(dll_t *self, void *data)
 {
-    dll_node_t *node = (dll_node_t *)malloc(sizeof(dll_node_t));
+    dll_node_t *node = malloc(sizeof(dll_node_t));
     node->data = data;
     node->next = self->head;
     node->prev = NULL;
@@ -132,5 +132,35 @@ void *dll_pop_front(dll_t *self)
     }
     self->size--;
     free(node);
+    return data;
+}
+
+void *dll_insert(dll_t *self, void *data, size_t index)
+{
+    if (index > self->size)
+    {
+        fprintf(stderr, "dll_insert: index out of bounds");
+        return NULL;
+    }
+    if (index == 0)
+    {
+        return dll_push_front(self, data);
+    }
+    if (index == self->size)
+    {
+        return dll_push_back(self, data);
+    }
+    dll_node_t *node = malloc(sizeof(dll_node_t));
+    node->data = data;
+    dll_node_t *prev = self->head;
+    for (size_t i = 0; i < index - 1; i++)
+    {
+        prev = prev->next;
+    }
+    node->next = prev->next;
+    node->prev = prev;
+    prev->next->prev = node;
+    prev->next = node;
+    self->size++;
     return data;
 }

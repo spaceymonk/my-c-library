@@ -18,8 +18,8 @@ int main()
     int *b = (int *)malloc(sizeof(int));
     *b = 2;
     
-    dll_push_back(dll, a);
-    dll_push_back(dll, b);
+    dll_insert(dll, a, 0);
+    dll_insert(dll, b, 0);
 
     puts("List:");
     dll_print(dll, stdout, int_to_string);
