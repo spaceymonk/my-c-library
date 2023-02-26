@@ -93,7 +93,7 @@ void *dll_pop_back(dll_t *self)
 {
     if (self->tail == NULL)
     {
-        fprintf(stderr, "dll_pop_back: List is empty");
+        fprintf(stderr, "dll_pop_back: list is empty\n");
         return NULL;
     }
     dll_node_t *node = self->tail;
@@ -116,7 +116,7 @@ void *dll_pop_front(dll_t *self)
 {
     if (self->head == NULL)
     {
-        fprintf(stderr, "dll_pop_front: List is empty");
+        fprintf(stderr, "dll_pop_front: list is empty\n");
         return NULL;
     }
     dll_node_t *node = self->head;
