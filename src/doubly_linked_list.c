@@ -285,3 +285,73 @@ dll_t *dll_reverse(dll_t *self)
     }
     return self;
 }
+
+dll_t *dll_sort(dll_t *self, int (*cmp)(void *, void *))
+{
+    if (self->size == 0)
+    {
+        return self;
+    }
+    self->head = __dll_merge_sort(self->head, cmp);
+    self->tail = self->head;
+    while (self->tail->next != NULL)
+    {
+        self->tail = self->tail->next;
+    }
+    return self;
+}
+
+dll_node_t *__dll_get_middle_node(dll_node_t *head)
+{
+    dll_node_t *slow = head;
+    dll_node_t *fast = head;
+    while (fast != NULL && fast->next != NULL)
+    {
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+    return slow;
+}
+
+dll_node_t *__dll_merge_sorted_lists(dll_node_t *head1, dll_node_t *head2, int (*cmp)(void *, void *))
+{
+    if (head1 == NULL)
+    {
+        return head2;
+    }
+    if (head2 == NULL)
+    {
+        return head1;
+    }
+    dll_node_t *head = NULL;
+    if (cmp(head1->data, head2->data) < 0)
+    {
+        head = head1;
+        head->next = __dll_merge_sorted_lists(head1->next, head2, cmp);
+        head->next->prev = head;
+        head->prev = NULL;
+    }
+    else
+    {
+        head = head2;
+        head->next = __dll_merge_sorted_lists(head1, head2->next, cmp);
+        head->next->prev = head;
+        head->prev = NULL;
+    }
+    return head;
+}
+
+dll_node_t *__dll_merge_sort(dll_node_t *head, int (*cmp)(void *, void *))
+{
+    if (head == NULL || head->next == NULL)
+    {
+        return head;
+    }
+    dll_node_t *middle = __dll_get_middle_node(head);
+    dll_node_t *next_of_middle = middle->next;
+    middle->next = NULL;
+    dll_node_t *left = __dll_merge_sort(head, cmp);
+    dll_node_t *right = __dll_merge_sort(next_of_middle, cmp);
+    dll_node_t *sorted_list = __dll_merge_sorted_lists(left, right, cmp);
+    return sorted_list;
+}

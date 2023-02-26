@@ -15,6 +15,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/* ================================================================================================================== */
+/*                                                  TYPE DEFINITIONS                                                  */
+/* ================================================================================================================== */
+
 /**
  * @brief A node in the list
  *
@@ -42,6 +46,10 @@ typedef struct dll
     dll_node_t *tail;
     size_t size;
 } dll_t;
+
+/* ================================================================================================================== */
+/*                                                  FUNCTION PROTOTYPES                                               */
+/* ================================================================================================================== */
 
 /**
  * @brief Creates a new doubly linked list
@@ -138,25 +146,25 @@ void dll_clear(dll_t *self, void (*free_handler)(void *));
 /**
  * @brief Inserts data after the given node
  *      and returns the new node
- * 
+ *
  * @param self  The list to insert to
  * @param node  The node to insert after
  * @param data  The data to insert
- * 
+ *
  * @return The new node, NULL if an error occured
-*/
+ */
 dll_node_t *dll_insert_after(dll_t *self, dll_node_t *node, void *data);
 
 /**
  * @brief Inserts data before the given node
  *      and returns the new node
- * 
+ *
  * @param self  The list to insert to
  * @param node  The node to insert before
  * @param data  The data to insert
- * 
+ *
  * @return The new node, NULL if an error occured
-*/
+ */
 dll_node_t *dll_insert_before(dll_t *self, dll_node_t *node, void *data);
 
 /**
@@ -186,6 +194,15 @@ void *dll_remove(dll_t *self, dll_node_t *node);
 dll_node_t *dll_search(dll_t *self, void *data, int (*cmp)(void *, void *));
 
 /**
+ * @brief Reverses the list in place and returns it
+ *
+ * @param self  The list to reverse
+ *
+ * @return `self` as a reversed list
+ */
+dll_t *dll_reverse(dll_t *self);
+
+/**
  * @brief Sorts the list in place using the given comparision
  *       function and returns the sorted list
  *
@@ -203,12 +220,34 @@ dll_node_t *dll_search(dll_t *self, void *data, int (*cmp)(void *, void *));
 dll_t *dll_sort(dll_t *self, int (*cmp)(void *, void *));
 
 /**
- * @brief Reverses the list in place and returns it
- * 
- * @param self  The list to reverse
- * 
- * @return `self` as a reversed list
+ * @brief Get the middle node of a linked list
+ * @attention This function is not meant to be used by the user.
+ *
+ * @param head  head of the linked list
+ *
+ * @return dll_node_t*  middle node of the linked list
  */
-dll_t *dll_reverse(dll_t *self);
+dll_node_t *__dll_get_middle_node(dll_node_t *head);
+
+/**
+ * @brief Merge two sorted linked lists
+ * @attention This function is not meant to be used by the user.
+ *
+ * @param head1  head of the first sorted linked list
+ * @param head2  head of the second sorted linked list
+ * 
+ * @return dll_node_t*  head of the merged linked list
+ */
+dll_node_t *__dll_merge(dll_node_t *left, dll_node_t *right, int (*cmp)(void *, void *));
+
+/**
+ * @brief Merge sort a linked list
+ * @attention This function is not meant to be used by the user.
+ *
+ * @param head  head of the linked list
+ * 
+ * @return dll_node_t*  head of the sorted linked list
+ */
+dll_node_t *__dll_merge_sort(dll_node_t *head, int (*cmp)(void *, void *));
 
 #endif

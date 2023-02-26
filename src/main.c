@@ -36,7 +36,7 @@ int main()
     dll_print(dll, stdout, int_to_string);
     fflush(stdout);
 
-    dll_reverse(dll);
+    dll_sort(dll, int_compare);
     dll_print(dll, stdout, int_to_string);
     fflush(stdout);
 
