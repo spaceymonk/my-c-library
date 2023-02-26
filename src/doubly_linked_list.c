@@ -135,95 +135,96 @@ void *dll_pop_front(dll_t *self)
     return data;
 }
 
-void *dll_insert(dll_t *self, void *data, size_t index)
+dll_node_t *dll_insert_after(dll_t *self, dll_node_t *node, void *data)
 {
-    if (index > self->size)
+    if (node == NULL)
     {
-        fprintf(stderr, "dll_insert: index out of bounds");
+        if (self->size == 0)
+        {
+            return dll_push_back(self, data);
+        }
+        fprintf(stderr, "dll_insert_after: node is NULL");
         return NULL;
     }
-    if (index == 0)
+
+    dll_node_t *new_node = malloc(sizeof(dll_node_t));
+    new_node->data = data;
+    new_node->next = node->next;
+    new_node->prev = node;
+    if (node->next)
     {
-        return dll_push_front(self, data);
+        node->next->prev = new_node;
     }
-    if (index == self->size)
+    else
     {
-        return dll_push_back(self, data);
+        self->tail = new_node;
     }
-    dll_node_t *node = malloc(sizeof(dll_node_t));
-    node->data = data;
-    dll_node_t *prev = self->head;
-    for (size_t i = 0; i < index - 1; i++)
-    {
-        prev = prev->next;
-    }
-    node->next = prev->next;
-    node->prev = prev;
-    prev->next->prev = node;
-    prev->next = node;
+    node->next = new_node;
     self->size++;
-    return data;
+    return new_node;
 }
 
-void *dll_remove(dll_t *self, size_t index)
+dll_node_t *dll_insert_before(dll_t *self, dll_node_t *node, void *data)
 {
-    if (index >= self->size)
+    if (node == NULL)
     {
-        fprintf(stderr, "dll_insert: index out of bounds");
+        if (self->size == 0)
+        {
+            return dll_push_front(self, data);
+        }
+        fprintf(stderr, "dll_insert_before: node is NULL");
         return NULL;
     }
-    if (index == 0)
+
+    dll_node_t *new_node = malloc(sizeof(dll_node_t));
+    new_node->data = data;
+    new_node->next = node;
+    new_node->prev = node->prev;
+    if (node->prev)
     {
-        return dll_pop_front(self);
+        node->prev->next = new_node;
     }
-    if (index == self->size - 1)
+    else
     {
-        return dll_pop_back(self);
+        self->head = new_node;
     }
-    dll_node_t *prev = self->head;
-    for (size_t i = 0; i < index - 1; i++)
+    node->prev = new_node;
+    self->size++;
+    return new_node;
+}
+
+void *dll_remove(dll_t *self, dll_node_t *node)
+{
+    if (node == NULL)
     {
-        prev = prev->next;
+        fprintf(stderr, "dll_remove: node is NULL");
+        return NULL;
     }
-    dll_node_t *node = prev->next;
+    if (self->size == 0)
+    {
+        fprintf(stderr, "dll_remove: list is empty");
+        return NULL;
+    }
+    if (node->prev)
+    {
+        node->prev->next = node->next;
+    }
+    else
+    {
+        self->head = node->next;
+    }
+    if (node->next)
+    {
+        node->next->prev = node->prev;
+    }
+    else
+    {
+        self->tail = node->prev;
+    }
     void *data = node->data;
-    prev->next = node->next;
-    node->next->prev = prev;
     free(node);
     self->size--;
     return data;
-}
-
-void *dll_get(dll_t *self, size_t index)
-{
-    if (index >= self->size)
-    {
-        fprintf(stderr, "dll_get: index out of bounds");
-        return NULL;
-    }
-    dll_node_t *node = self->head;
-    for (size_t i = 0; i < index; i++)
-    {
-        node = node->next;
-    }
-    return node->data;
-}
-
-void *dll_set(dll_t *self, void *data, size_t index)
-{
-    if (index >= self->size)
-    {
-        fprintf(stderr, "dll_set: index out of bounds");
-        return NULL;
-    }
-    dll_node_t *node = self->head;
-    for (size_t i = 0; i < index; i++)
-    {
-        node = node->next;
-    }
-    void *old_data = node->data;
-    node->data = data;
-    return old_data;
 }
 
 void dll_clear(dll_t *self, void (*free_handler)(void *))

@@ -121,58 +121,6 @@ void *dll_pop_back(dll_t *self);
 void *dll_pop_front(dll_t *self);
 
 /**
- * @brief Inserts data after the given index
- *
- * @param self   The list to insert into
- * @param data   The data to insert
- * @param index  The index to insert at
- *
- * @note If the index is out of bounds this function
- *      will return NULL and print an error message to
- *      stderr.
- *
- * @return The data that was inserted,
- *        NULL if the index is out of bounds
- */
-void *dll_insert(dll_t *self, void *data, size_t index);
-
-/**
- * @brief Removes the element at the given index
- *       and returns it
- *
- * @note This function does not free the data that
- *      was removed. It is up to the user to free
- *      the data if needed.
- *
- * @param self   The list to remove from
- * @param index  The index to remove at
- *
- * @return The data that was removed
- */
-void *dll_remove(dll_t *self, size_t index);
-
-/**
- * @brief Gets the data at the given index
- *
- * @param self   The list to get from
- * @param index  The index to get at
- *
- * @return The data at the given index
- */
-void *dll_get(dll_t *self, size_t index);
-
-/**
- * @brief Sets the data at the given index
- *
- * @param self   The list to set in
- * @param data   The data to set
- * @param index  The index to set at
- *
- * @return The data that was replaced
- */
-void *dll_set(dll_t *self, void *data, size_t index);
-
-/**
  * @brief Clears the list and frees all nodes by
  *       calling the free function on the data
  *
@@ -186,6 +134,41 @@ void *dll_set(dll_t *self, void *data, size_t index);
  * @return void
  */
 void dll_clear(dll_t *self, void (*free_handler)(void *));
+
+/**
+ * @brief Inserts data after the given node
+ *      and returns the new node
+ * 
+ * @param self  The list to insert to
+ * @param node  The node to insert after
+ * @param data  The data to insert
+ * 
+ * @return The new node, NULL if an error occured
+*/
+dll_node_t *dll_insert_after(dll_t *self, dll_node_t *node, void *data);
+
+/**
+ * @brief Inserts data before the given node
+ *      and returns the new node
+ * 
+ * @param self  The list to insert to
+ * @param node  The node to insert before
+ * @param data  The data to insert
+ * 
+ * @return The new node, NULL if an error occured
+*/
+dll_node_t *dll_insert_before(dll_t *self, dll_node_t *node, void *data);
+
+/**
+ * @brief Removes the given node from the list
+ *      and returns the data
+ *
+ * @param self  The list to remove from
+ * @param node  The node to remove
+ *
+ * @return The data that was removed, NULL if an error occured
+ */
+void *dll_remove(dll_t *self, dll_node_t *node);
 
 /**
  * @brief Search for the given data in the list
