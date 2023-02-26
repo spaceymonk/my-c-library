@@ -40,9 +40,8 @@ int main()
     dll_print(dll, stdout, int_to_string);
     fflush(stdout);
 
-    int *f = (int *)malloc(sizeof(int));
-    *f = 2;
-    dll_node_t *found = dll_search(dll, f, int_compare);
+    int f = 2;
+    dll_node_t *found = dll_search(dll, &f, int_compare);
     if (found)
     {
         dll_remove(dll, found);
@@ -58,7 +57,6 @@ int main()
     free(b);
     free(c);
     free(d);
-    free(f);
     dll_clear(dll, NULL);
     dll_free(dll);
 

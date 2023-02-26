@@ -172,7 +172,7 @@ void *dll_remove(dll_t *self, dll_node_t *node);
 
 /**
  * @brief Search for the given data in the list
- *       and returns the node that contains it
+ *       and returns the first node that contains it
  *
  * @param self  The list to search in
  * @param data  The data to search for
@@ -196,28 +196,11 @@ dll_node_t *dll_search(dll_t *self, void *data, int (*cmp)(void *, void *));
  *      data is equal, negative if the first data is less
  *      than the second, and positive otherwise.
  *
- * @note This function uses the quick sort algorithm.
- *
- * @return `self` as a sorted list
- */
-dll_t *dll_sort(dll_t *self, int (*cmp)(void *, void *));
-
-/**
- * @brief Stable sorts the list in place using the given
- *       comparision function and returns the sorted list
- *
- * @param self  The list to sort
- * @param cmp   The comparison function to compare the data
- *
- * @note The comparasion function should return 0 if the
- *     data is equal, negative if the first data is less
- *    than the second, and positive otherwise.
- *
  * @note This function uses the merge sort algorithm.
  *
  * @return `self` as a sorted list
  */
-dll_t *dll_stable_sort(dll_t *self, int (*cmp)(void *, void *));
+dll_t *dll_sort(dll_t *self, int (*cmp)(void *, void *));
 
 /**
  * @brief Reverses the list in place and returns it
