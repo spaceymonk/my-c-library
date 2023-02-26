@@ -39,6 +39,9 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+debug: CFLAGS += -DDEBUG -g
+debug: all
+
 clean:
 	rm -rf $(OBJ_DIR) $(BIN_DIR)
 
