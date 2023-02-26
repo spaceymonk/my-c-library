@@ -176,9 +176,7 @@ void *dll_remove(dll_t *self, dll_node_t *node);
  *
  * @param self  The list to search in
  * @param data  The data to search for
- * @param cmp   The comparison function to compare the data,
- *             if this param is NULL, the data will be compared
- *             using pointer equality.
+ * @param cmp   The comparison function to compare the data
  *
  * @note The comparasion function should return 0 if the
  *      data is equal.
@@ -186,24 +184,6 @@ void *dll_remove(dll_t *self, dll_node_t *node);
  * @return The node that contains the data, NULL if not found
  */
 dll_node_t *dll_search(dll_t *self, void *data, int (*cmp)(void *, void *));
-
-/**
- * @brief Binary search for the given data in the list
- *      and returns the node that contains it
- *
- * @param self  The list to search in
- * @param data  The data to search for
- * @param cmp   The comparison function to compare the data
- *
- * @attention The list must be sorted for this function to work.
- *
- * @note The comparasion function should return 0 if the
- *      data is equal, negative if the first data is less
- *      than the second, and positive otherwise.
- *
- * @return The node that contains the data, NULL if not found
- */
-dll_node_t *dll_binary_search(dll_t *self, void *data, int (*cmp)(void *, void *));
 
 /**
  * @brief Sorts the list in place using the given comparision

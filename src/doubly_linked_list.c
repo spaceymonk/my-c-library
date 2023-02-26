@@ -227,6 +227,20 @@ void *dll_remove(dll_t *self, dll_node_t *node)
     return data;
 }
 
+dll_node_t *dll_search(dll_t *self, void *data, int (*cmp)(void *, void *))
+{
+    dll_node_t *node = self->head;
+    while (node != NULL)
+    {
+        if (cmp(node->data, data) == 0)
+        {
+            return node;
+        }
+        node = node->next;
+    }
+    return NULL;
+}
+
 void dll_clear(dll_t *self, void (*free_handler)(void *))
 {
     if (free_handler == NULL)
