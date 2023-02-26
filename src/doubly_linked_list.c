@@ -18,6 +18,11 @@
 dll_t *dll_new()
 {
     dll_t *dll = malloc(sizeof(dll_t));
+    if (dll == NULL)
+    {
+        fprintf(stderr, "dll_new: malloc failed\n");
+        return NULL;
+    }
     dll->head = NULL;
     dll->tail = NULL;
     dll->size = 0;
@@ -26,34 +31,64 @@ dll_t *dll_new()
 
 int dll_free(dll_t *dll)
 {
-    if (dll->size == 0)
+    if (dll == NULL)
     {
-        free(dll);
-        return 0;
+        fprintf(stderr, "dll_free: list is NULL\n");
+        return 1;
     }
-    fprintf(stderr, "dll_free: list is not empty\n");
-    return 1;
+    if (dll->size != 0)
+    {
+        fprintf(stderr, "dll_free: list is not empty\n");
+        return 1;
+    }
+    free(dll);
+    return 0;
 }
 
-void dll_print(dll_t *self, FILE *fd, char *(*to_string)(void *))
+int dll_print(dll_t *self, FILE *fd, char *(*to_string)(void *))
 {
-    fwrite("[", 1, 2, fd);
+    size_t written_bytes = fwrite("[", 1, 1, fd);
+    if (written_bytes != 1)
+    {
+        fprintf(stderr, "dll_print: fwrite failed\n");
+        return 1;
+    }
     for (dll_node_t *node = self->head; node != NULL; node = node->next)
     {
         char *str = to_string(node->data);
-        fwrite(str, 1, strlen(str), fd);
+        written_bytes = fwrite(str, 1, strlen(str), fd);
+        if (written_bytes != strlen(str))
+        {
+            fprintf(stderr, "dll_print: fwrite failed\n");
+            return 1;
+        }
         free(str);
         if (node->next)
         {
-            fwrite(", ", 1, 3, fd);
+            written_bytes = fwrite(", ", 1, 2, fd);
+            if (written_bytes != 2)
+            {
+                fprintf(stderr, "dll_print: fwrite failed\n");
+                return 1;
+            }
         }
     }
-    fwrite("]\n", 1, 3, fd);
+    written_bytes = fwrite("]\n", 1, 2, fd);
+    if (written_bytes != 2)
+    {
+        fprintf(stderr, "dll_print: fwrite failed\n");
+        return 1;
+    }
 }
 
 void *dll_push_back(dll_t *self, void *data)
 {
     dll_node_t *node = malloc(sizeof(dll_node_t));
+    if (node == NULL)
+    {
+        fprintf(stderr, "dll_push_back: malloc failed\n");
+        return NULL;
+    }
     node->data = data;
     node->next = NULL;
     node->prev = self->tail;
@@ -73,6 +108,11 @@ void *dll_push_back(dll_t *self, void *data)
 void *dll_push_front(dll_t *self, void *data)
 {
     dll_node_t *node = malloc(sizeof(dll_node_t));
+    if (node == NULL)
+    {
+        fprintf(stderr, "dll_push_front: malloc failed\n");
+        return NULL;
+    }
     node->data = data;
     node->next = self->head;
     node->prev = NULL;
@@ -148,6 +188,11 @@ dll_node_t *dll_insert_after(dll_t *self, dll_node_t *node, void *data)
     }
 
     dll_node_t *new_node = malloc(sizeof(dll_node_t));
+    if (new_node == NULL)
+    {
+        fprintf(stderr, "dll_insert_after: malloc failed\n");
+        return NULL;
+    }
     new_node->data = data;
     new_node->next = node->next;
     new_node->prev = node;
@@ -177,6 +222,11 @@ dll_node_t *dll_insert_before(dll_t *self, dll_node_t *node, void *data)
     }
 
     dll_node_t *new_node = malloc(sizeof(dll_node_t));
+    if (new_node == NULL)
+    {
+        fprintf(stderr, "dll_insert_before: malloc failed\n");
+        return NULL;
+    }
     new_node->data = data;
     new_node->next = node;
     new_node->prev = node->prev;
@@ -269,7 +319,7 @@ void dll_clear(dll_t *self, void (*free_handler)(void *))
 
 dll_t *dll_reverse(dll_t *self)
 {
-    if (self->size == 0)
+    if (self->size <= 1)
     {
         return self;
     }

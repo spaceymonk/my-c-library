@@ -15,9 +15,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* ================================================================================================================== */
-/*                                                  TYPE DEFINITIONS                                                  */
-/* ================================================================================================================== */
+/* ========================================================================== */
+/*                              TYPE DEFINITIONS                              */
+/* ========================================================================== */
 
 /**
  * @brief A node in the list
@@ -53,14 +53,17 @@ typedef struct dll
     size_t size;
 } dll_t;
 
-/* ================================================================================================================== */
-/*                                                  FUNCTION PROTOTYPES                                               */
-/* ================================================================================================================== */
+/* ========================================================================== */
+/*                             FUNCTION PROTOTYPES                            */
+/* ========================================================================== */
 
 /**
  * @brief Creates a new doubly linked list
  *
+ * @note If allocation fails an error message will be printed to stderr
+ *
  * @return The new list
+ * @retval NULL If the allocation failed
  */
 dll_t *dll_new();
 
@@ -68,8 +71,13 @@ dll_t *dll_new();
  * @brief Frees the list
  *
  * @param self  The list to free
+ * 
+ * @attention List size should be 0 prior to calling this function
+ * @note If the list size is not 0, an error message will be printed to stderr
  *
- * @return 1 on failure, 0 on success
+ * @return  The status of the operation
+ * @retval  1, If the list an error occurred
+ * @retval  0, If the list is freed successfully
  */
 int dll_free(dll_t *self);
 
@@ -84,17 +92,24 @@ int dll_free(dll_t *self);
  *                 the heap. The `dll_print` function will free
  *                 the string after printing it.
  *
- * @return void
+ * @note If allocation fails an error message will be printed to stderr
+ *
+ * @return The status of the operation
+ * @retval 1, If an error occurred
+ * @retval 0, If the list is printed successfully
  */
-void dll_print(dll_t *self, FILE *fd, char *(*to_string)(void *));
+int dll_print(dll_t *self, FILE *fd, char *(*to_string)(void *));
 
 /**
  * @brief Pushes data to the back of the list
  *
  * @param self  The list to push to
  * @param data  The data to push
+ * 
+ * @note If allocation fails an error message will be printed to stderr
  *
  * @return The data that was pushed
+ * @retval NULL If the allocation failed
  */
 void *dll_push_back(dll_t *self, void *data);
 
@@ -104,7 +119,10 @@ void *dll_push_back(dll_t *self, void *data);
  * @param self  The list to push to
  * @param data  The data to push
  *
+ * @note If allocation fails an error message will be printed to stderr
+ * 
  * @return The data that was pushed
+ * @retval NULL If the allocation failed
  */
 void *dll_push_front(dll_t *self, void *data);
 
@@ -114,11 +132,12 @@ void *dll_push_front(dll_t *self, void *data);
  * @param self  The list to pop from
  *
  * @note If the list is empty this function will
- *      return NULL and print an error message to
- *      stderr.
+ *      print an error message to stderr.
+ * 
+ * @note If allocation fails an error message will be printed to stderr
  *
- * @return The data that was popped,
- *        NULL if the list is empty
+ * @return The data that was popped
+ * @retval NULL If the list is empty
  */
 void *dll_pop_back(dll_t *self);
 
@@ -126,11 +145,10 @@ void *dll_pop_back(dll_t *self);
  * @brief Pops the first element of the list
  *
  * @note If the list is empty this function will
- *      return NULL and print an error message to
- *      stderr.
+ *      print an error message to stderr.
  *
- * @return The data that was popped,
- *        NULL if the list is empty
+ * @return The data that was popped
+ * @retval NULL if the list is empty
  */
 void *dll_pop_front(dll_t *self);
 
@@ -151,13 +169,14 @@ void dll_clear(dll_t *self, void (*free_handler)(void *));
 
 /**
  * @brief Inserts data after the given node
- *      and returns the new node
+ *       and returns the new node
  *
  * @param self  The list to insert to
  * @param node  The node to insert after
  * @param data  The data to insert
  *
- * @return The new node, NULL if an error occured
+ * @return The newly created node
+ * @retval NULL If an error occured
  */
 dll_node_t *dll_insert_after(dll_t *self, dll_node_t *node, void *data);
 
@@ -169,7 +188,11 @@ dll_node_t *dll_insert_after(dll_t *self, dll_node_t *node, void *data);
  * @param node  The node to insert before
  * @param data  The data to insert
  *
- * @return The new node, NULL if an error occured
+ * @note If an error occurs, this function will print
+ *     an error message to stderr.
+ *
+ * @return The new node
+ * @retval NULL If an error occured
  */
 dll_node_t *dll_insert_before(dll_t *self, dll_node_t *node, void *data);
 
@@ -180,7 +203,11 @@ dll_node_t *dll_insert_before(dll_t *self, dll_node_t *node, void *data);
  * @param self  The list to remove from
  * @param node  The node to remove
  *
- * @return The data that was removed, NULL if an error occured
+ * @note If an error occurs, this function will print
+ *    an error message to stderr.
+ *
+ * @return The data that was removed
+ * @retval NULL If an error occured
  */
 void *dll_remove(dll_t *self, dll_node_t *node);
 
@@ -244,7 +271,8 @@ dll_node_t *__dll_get_middle_node(dll_node_t *head);
  *
  * @return  head of the merged linked list
  */
-dll_node_t *__dll_merge(dll_node_t *left, dll_node_t *right, int (*cmp)(void *, void *));
+dll_node_t *__dll_merge(dll_node_t *left, dll_node_t *right,
+                        int (*cmp)(void *, void *));
 
 /**
  * @brief Merge sort a linked list from the given head
