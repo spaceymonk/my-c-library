@@ -273,16 +273,17 @@ dll_t *dll_reverse(dll_t *self)
     {
         return self;
     }
-    dll_node_t *left_iter = self->head;
-    dll_node_t *right_iter = self->tail;
-    while (left_iter != right_iter && left_iter->prev != right_iter)
+    dll_node_t *node = self->head;
+    while (node != NULL)
     {
-        void *temp_data = left_iter->data;
-        left_iter->data = right_iter->data;
-        right_iter->data = temp_data;
-        left_iter = left_iter->next;
-        right_iter = right_iter->prev;
+        dll_node_t *tmp = node->next;
+        node->next = node->prev;
+        node->prev = tmp;
+        node = tmp;
     }
+    node = self->head;
+    self->head = self->tail;
+    self->tail = node;
     return self;
 }
 

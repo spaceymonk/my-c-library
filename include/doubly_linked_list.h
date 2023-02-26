@@ -22,6 +22,9 @@
 /**
  * @brief A node in the list
  *
+ * @attention Do not modify this struct directly.
+ *           Use the functions provided in this header.
+ *
  * @param data  The data stored in the node
  * @param next  The next node in the list
  * @param prev  The previous node in the list
@@ -35,6 +38,9 @@ typedef struct dll_node
 
 /**
  * @brief A doubly linked list structure
+ *
+ * @attention Do not modify this struct directly.
+ *           Use the functions provided in this header.
  *
  * @param head  The head of the list
  * @param tail  The tail of the list
@@ -235,7 +241,7 @@ dll_node_t *__dll_get_middle_node(dll_node_t *head);
  *
  * @param head1  head of the first sorted linked list
  * @param head2  head of the second sorted linked list
- * 
+ *
  * @return  head of the merged linked list
  */
 dll_node_t *__dll_merge(dll_node_t *left, dll_node_t *right, int (*cmp)(void *, void *));
@@ -245,7 +251,7 @@ dll_node_t *__dll_merge(dll_node_t *left, dll_node_t *right, int (*cmp)(void *, 
  * @attention This function is not meant to be used by the user.
  *
  * @param head  head of the linked list
- * 
+ *
  * @return  head of the sorted linked list
  */
 dll_node_t *__dll_sort(dll_node_t *head, int (*cmp)(void *, void *));

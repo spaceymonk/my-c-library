@@ -20,27 +20,24 @@ int main()
 
     dll_t *dll = dll_new();
 
-    int *a = (int *)malloc(sizeof(int));
-    *a = 1;
-    int *b = (int *)malloc(sizeof(int));
-    *b = 2;
-    int *c = (int *)malloc(sizeof(int));
-    *c = 3;
-    int *d = (int *)malloc(sizeof(int));
-    *d = 4;
+    int a = 1;
+    int b = 2;
+    int c = 3;
+    int d = 4;
+    int f = 2;
 
-    dll_insert_after(dll, dll->head, a);
-    dll_insert_after(dll, dll->head, b);
-    dll_insert_after(dll, dll->head, c);
-    dll_insert_after(dll, dll->head, d);
+    dll_insert_after(dll, dll->head, &a);
+    dll_insert_after(dll, dll->head, &b);
+    dll_insert_after(dll, dll->head, &c);
+    dll_insert_after(dll, dll->head, &d);
     dll_print(dll, stdout, int_to_string);
     fflush(stdout);
 
     dll_sort(dll, int_compare);
+    dll_reverse(dll);
     dll_print(dll, stdout, int_to_string);
     fflush(stdout);
 
-    int f = 2;
     dll_node_t *found = dll_search(dll, &f, int_compare);
     if (found)
     {
@@ -52,11 +49,6 @@ int main()
     }
     dll_print(dll, stdout, int_to_string);
 
-
-    free(a);
-    free(b);
-    free(c);
-    free(d);
     dll_clear(dll, NULL);
     dll_free(dll);
 
