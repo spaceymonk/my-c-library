@@ -143,7 +143,7 @@ dll_node_t *dll_insert_after(dll_t *self, dll_node_t *node, void *data)
         {
             return dll_push_back(self, data);
         }
-        fprintf(stderr, "dll_insert_after: node is NULL");
+        fprintf(stderr, "dll_insert_after: node is NULL\n");
         return NULL;
     }
 
@@ -172,7 +172,7 @@ dll_node_t *dll_insert_before(dll_t *self, dll_node_t *node, void *data)
         {
             return dll_push_front(self, data);
         }
-        fprintf(stderr, "dll_insert_before: node is NULL");
+        fprintf(stderr, "dll_insert_before: node is NULL\n");
         return NULL;
     }
 
@@ -197,12 +197,12 @@ void *dll_remove(dll_t *self, dll_node_t *node)
 {
     if (node == NULL)
     {
-        fprintf(stderr, "dll_remove: node is NULL");
+        fprintf(stderr, "dll_remove: node is NULL\n");
         return NULL;
     }
     if (self->size == 0)
     {
-        fprintf(stderr, "dll_remove: list is empty");
+        fprintf(stderr, "dll_remove: list is empty\n");
         return NULL;
     }
     if (node->prev)
@@ -265,4 +265,23 @@ void dll_clear(dll_t *self, void (*free_handler)(void *))
         }
     }
     self->size = 0;
+}
+
+dll_t *dll_reverse(dll_t *self)
+{
+    if (self->size == 0)
+    {
+        return self;
+    }
+    dll_node_t *left_iter = self->head;
+    dll_node_t *right_iter = self->tail;
+    while (left_iter != right_iter && left_iter->prev != right_iter)
+    {
+        void *temp_data = left_iter->data;
+        left_iter->data = right_iter->data;
+        right_iter->data = temp_data;
+        left_iter = left_iter->next;
+        right_iter = right_iter->prev;
+    }
+    return self;
 }
