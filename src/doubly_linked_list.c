@@ -31,7 +31,7 @@ int dll_free(dll_t *dll)
         free(dll);
         return 0;
     }
-    fprintf(stderr, "dll_free: dll is not empty\n");
+    fprintf(stderr, "dll_free: list is not empty\n");
     return 1;
 }
 
@@ -163,4 +163,59 @@ void *dll_insert(dll_t *self, void *data, size_t index)
     prev->next = node;
     self->size++;
     return data;
+}
+
+void *dll_remove(dll_t *self, size_t index)
+{
+    if (index >= self->size)
+    {
+        fprintf(stderr, "dll_insert: index out of bounds");
+        return NULL;
+    }
+    if (index == 0)
+    {
+        return dll_pop_front(self);
+    }
+    if (index == self->size - 1)
+    {
+        return dll_pop_back(self);
+    }
+    dll_node_t *prev = self->head;
+    for (size_t i = 0; i < index - 1; i++)
+    {
+        prev = prev->next;
+    }
+    dll_node_t *node = prev->next;
+    void *data = node->data;
+    prev->next = node->next;
+    node->next->prev = prev;
+    free(node);
+    self->size--;
+    return data;
+}
+
+void dll_clear(dll_t *self, void (*free_handler)(void *))
+{
+    if (free_handler == NULL)
+    {
+        dll_node_t *node = self->head;
+        while (node != NULL)
+        {
+            dll_node_t *next = node->next;
+            free(node);
+            node = next;
+        }
+    }
+    else
+    {
+        dll_node_t *node = self->head;
+        while (node != NULL)
+        {
+            dll_node_t *next = node->next;
+            free_handler(node->data);
+            free(node);
+            node = next;
+        }
+    }
+    self->size = 0;
 }

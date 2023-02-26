@@ -17,22 +17,26 @@ int main()
     *a = 1;
     int *b = (int *)malloc(sizeof(int));
     *b = 2;
-    
+
     dll_insert(dll, a, 0);
     dll_insert(dll, b, 0);
+    dll_insert(dll, b, 0);
+    dll_insert(dll, b, 0);
 
-    puts("List:");
-    dll_print(dll, stdout, int_to_string);
-    fflush(stdout);
-
-    free(dll_pop_front(dll));
-    puts("after pop front");
     dll_print(dll, stdout, int_to_string);
 
-    free(dll_pop_back(dll));
-    puts("After pop back");
+    dll_remove(dll, 1);
     dll_print(dll, stdout, int_to_string);
 
+    dll_remove(dll, 1);
+    dll_print(dll, stdout, int_to_string);
+
+    dll_remove(dll, 1);
+    dll_print(dll, stdout, int_to_string);
+
+    free(a);
+    free(b);
+    dll_clear(dll, NULL);
     dll_free(dll);
 
     return 0;

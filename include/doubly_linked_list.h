@@ -12,7 +12,7 @@
 #ifndef DOUBLE_LINKED_LIST_H
 #define DOUBLE_LINKED_LIST_H
 
-#include<stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 /**
@@ -69,7 +69,7 @@ int dll_free(dll_t *self);
  *                 a pointer to a string that is allocated on
  *                 the heap. The `dll_print` function will free
  *                 the string after printing it.
- * 
+ *
  * @return void
  */
 void dll_print(dll_t *self, FILE *fd, char *(*to_string)(void *));
@@ -126,7 +126,7 @@ void *dll_pop_front(dll_t *self);
  * @param self   The list to insert into
  * @param data   The data to insert
  * @param index  The index to insert at
- * 
+ *
  * @note If the index is out of bounds this function
  *      will return NULL and print an error message to
  *      stderr.
@@ -177,7 +177,11 @@ void *dll_set(dll_t *self, void *data, size_t index);
  *      calling the free function on the data
  *
  * @param self          The list to clear
- * @param free_handler  The function to free the data
+ * @param free_handler  The function to free the data. This
+ *                     param can be NULL if the data does
+ *                     not need to be freed. But user should
+ *                     make sure that the data is freed
+ *                     before the list is freed.
  *
  * @return void
  */
