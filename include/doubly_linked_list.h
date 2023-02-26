@@ -225,7 +225,7 @@ dll_t *dll_sort(dll_t *self, int (*cmp)(void *, void *));
  *
  * @param head  head of the linked list
  *
- * @return dll_node_t*  middle node of the linked list
+ * @return  middle node of the linked list
  */
 dll_node_t *__dll_get_middle_node(dll_node_t *head);
 
@@ -236,18 +236,18 @@ dll_node_t *__dll_get_middle_node(dll_node_t *head);
  * @param head1  head of the first sorted linked list
  * @param head2  head of the second sorted linked list
  * 
- * @return dll_node_t*  head of the merged linked list
+ * @return  head of the merged linked list
  */
 dll_node_t *__dll_merge(dll_node_t *left, dll_node_t *right, int (*cmp)(void *, void *));
 
 /**
- * @brief Merge sort a linked list
+ * @brief Merge sort a linked list from the given head
  * @attention This function is not meant to be used by the user.
  *
  * @param head  head of the linked list
  * 
- * @return dll_node_t*  head of the sorted linked list
+ * @return  head of the sorted linked list
  */
-dll_node_t *__dll_merge_sort(dll_node_t *head, int (*cmp)(void *, void *));
+dll_node_t *__dll_sort(dll_node_t *head, int (*cmp)(void *, void *));
 
 #endif

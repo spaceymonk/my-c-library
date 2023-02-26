@@ -9,7 +9,7 @@
  *
  */
 
-#include "doubly_linked_list.h"
+#include "../include/doubly_linked_list.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -292,7 +292,7 @@ dll_t *dll_sort(dll_t *self, int (*cmp)(void *, void *))
     {
         return self;
     }
-    self->head = __dll_merge_sort(self->head, cmp);
+    self->head = __dll_sort(self->head, cmp);
     self->tail = self->head;
     while (self->tail->next != NULL)
     {
@@ -305,7 +305,7 @@ dll_node_t *__dll_get_middle_node(dll_node_t *head)
 {
     dll_node_t *slow = head;
     dll_node_t *fast = head;
-    while (fast != NULL && fast->next != NULL)
+    while (fast->next != NULL && fast->next->next != NULL)
     {
         fast = fast->next->next;
         slow = slow->next;
@@ -313,7 +313,7 @@ dll_node_t *__dll_get_middle_node(dll_node_t *head)
     return slow;
 }
 
-dll_node_t *__dll_merge_sorted_lists(dll_node_t *head1, dll_node_t *head2, int (*cmp)(void *, void *))
+dll_node_t *__dll_merge(dll_node_t *head1, dll_node_t *head2, int (*cmp)(void *, void *))
 {
     if (head1 == NULL)
     {
@@ -323,25 +323,20 @@ dll_node_t *__dll_merge_sorted_lists(dll_node_t *head1, dll_node_t *head2, int (
     {
         return head1;
     }
-    dll_node_t *head = NULL;
     if (cmp(head1->data, head2->data) < 0)
     {
-        head = head1;
-        head->next = __dll_merge_sorted_lists(head1->next, head2, cmp);
-        head->next->prev = head;
-        head->prev = NULL;
+        head1->next = __dll_merge(head1->next, head2, cmp);
+        head1->next->prev = head1;
+        head1->prev = NULL;
+        return head1;
     }
-    else
-    {
-        head = head2;
-        head->next = __dll_merge_sorted_lists(head1, head2->next, cmp);
-        head->next->prev = head;
-        head->prev = NULL;
-    }
-    return head;
+    head2->next = __dll_merge(head1, head2->next, cmp);
+    head2->next->prev = head2;
+    head2->prev = NULL;
+    return head2;
 }
 
-dll_node_t *__dll_merge_sort(dll_node_t *head, int (*cmp)(void *, void *))
+dll_node_t *__dll_sort(dll_node_t *head, int (*cmp)(void *, void *))
 {
     if (head == NULL || head->next == NULL)
     {
@@ -350,8 +345,8 @@ dll_node_t *__dll_merge_sort(dll_node_t *head, int (*cmp)(void *, void *))
     dll_node_t *middle = __dll_get_middle_node(head);
     dll_node_t *next_of_middle = middle->next;
     middle->next = NULL;
-    dll_node_t *left = __dll_merge_sort(head, cmp);
-    dll_node_t *right = __dll_merge_sort(next_of_middle, cmp);
-    dll_node_t *sorted_list = __dll_merge_sorted_lists(left, right, cmp);
+    dll_node_t *left = __dll_sort(head, cmp);
+    dll_node_t *right = __dll_sort(next_of_middle, cmp);
+    dll_node_t *sorted_list = __dll_merge(left, right, cmp);
     return sorted_list;
 }

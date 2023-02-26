@@ -1,4 +1,4 @@
-#include "doubly_linked_list.h"
+#include "../include/doubly_linked_list.h"
 
 char *int_to_string(void *data)
 {
