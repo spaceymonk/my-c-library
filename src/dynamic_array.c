@@ -4,6 +4,11 @@
 
 da_t *da_new(size_t capacity)
 {
+    if (capacity == 0)
+    {
+        fprintf(stderr, "da_new: capacity is 0\n");
+        return NULL;
+    }
     da_t *da = malloc(sizeof(da_t));
     if (da == NULL)
     {
@@ -22,184 +27,204 @@ da_t *da_new(size_t capacity)
     return da;
 }
 
-int da_free(da_t *self)
+int da_free(da_t *da)
 {
-    if (self == NULL)
+    if (da == NULL)
     {
-        fprintf(stderr, "da_free: given parameter is NULL\n");
+        fprintf(stderr, "da_free: da is NULL\n");
         return -1;
     }
-    if (self->size > 0)
+    if (da->size > 0)
     {
-        fprintf(stderr, "da_free: array is not empty\n");
+        fprintf(stderr, "da_free: array is dirty\n");
         return -1;
     }
-    free(self->array);
-    free(self);
+    free(da->array);
+    free(da);
     return 0;
 }
 
-void *da_push_back(da_t *self, void *data)
+size_t da_size(da_t *da)
 {
-    if (self == NULL)
+    if (da == NULL)
     {
-        fprintf(stderr, "da_push_back: given parameter is NULL\n");
+        fprintf(stderr, "da_size: da is NULL\n");
+        return -1;
+    }
+    return da->size;
+}
+
+size_t da_capacity(da_t *da)
+{
+    if (da == NULL)
+    {
+        fprintf(stderr, "da_capacity: da is NULL\n");
+        return -1;
+    }
+    return da->capacity;
+}
+
+void *da_push_back(da_t *da, void *data)
+{
+    if (da == NULL)
+    {
+        fprintf(stderr, "da_push_back: da is NULL\n");
         return NULL;
     }
-    if (self->array == NULL)
+    if (da->array == NULL)
     {
         fprintf(stderr, "da_push_back: array is NULL\n");
         return NULL;
     }
-    if (self->size == self->capacity)
+    if (da->size == da->capacity)
     {
-        self->capacity *= 2;
-        self->array = realloc(self->array, sizeof(void *) * self->capacity);
-        if (self->array == NULL)
+        da->capacity *= 2;
+        da->array = realloc(da->array, sizeof(void *) * da->capacity);
+        if (da->array == NULL)
         {
             fprintf(stderr, "da_push_back: realloc failed\n");
             return NULL;
         }
     }
-    self->array[self->size] = data;
-    self->size++;
+    da->array[da->size] = data;
+    da->size++;
     return data;
 }
 
-void *da_set(da_t *self, size_t index, void *data)
+void *da_set(da_t *da, size_t index, void *data)
 {
-    if (self == NULL)
+    if (da == NULL)
     {
-        fprintf(stderr, "da_set: given parameter is NULL\n");
+        fprintf(stderr, "da_set: da is NULL\n");
         return NULL;
     }
-    if (self->array == NULL)
+    if (da->array == NULL)
     {
         fprintf(stderr, "da_set: array is NULL\n");
         return NULL;
     }
-    if (index >= self->size)
+    if (index >= da->size)
     {
         fprintf(stderr, "da_set: index out of bounds\n");
         return NULL;
     }
-    self->array[index] = data;
+    da->array[index] = data;
     return data;
 }
 
-void *da_get(da_t *self, size_t index)
+void *da_get(da_t *da, size_t index)
 {
-    if (self == NULL)
+    if (da == NULL)
     {
-        fprintf(stderr, "da_get: given parameter is NULL\n");
+        fprintf(stderr, "da_get: da is NULL\n");
         return NULL;
     }
-    if (self->array == NULL)
+    if (da->array == NULL)
     {
         fprintf(stderr, "da_get: array is NULL\n");
         return NULL;
     }
-    if (index >= self->size)
+    if (index >= da->size)
     {
         fprintf(stderr, "da_get: index out of bounds\n");
         return NULL;
     }
-    return self->array[index];
+    return da->array[index];
 }
 
-void *da_remove(da_t *self, size_t index)
+void *da_remove(da_t *da, size_t index)
 {
-    if (self == NULL)
+    if (da == NULL)
     {
-        fprintf(stderr, "da_remove: given parameter is NULL\n");
+        fprintf(stderr, "da_remove: da is NULL\n");
         return NULL;
     }
-    if (self->array == NULL)
+    if (da->array == NULL)
     {
         fprintf(stderr, "da_remove: array is NULL\n");
         return NULL;
     }
-    if (index >= self->size)
+    if (index >= da->size)
     {
         fprintf(stderr, "da_remove: index out of bounds\n");
         return NULL;
     }
-    void *data = self->array[index];
-    for (size_t i = index; i < self->size - 1; i++)
+    void *data = da->array[index];
+    for (size_t i = index; i < da->size - 1; i++)
     {
-        self->array[i] = self->array[i + 1];
+        da->array[i] = da->array[i + 1];
     }
-    self->size--;
+    da->size--;
     return data;
 }
 
-int da_clear(da_t *self, void (*free_handler)(void *))
+int da_clear(da_t *da, void (*free_handler)(void *))
 {
-    if (self == NULL)
+    if (da == NULL)
     {
-        fprintf(stderr, "da_clear: given parameter is NULL\n");
+        fprintf(stderr, "da_clear: da is NULL\n");
         return -1;
     }
-    if (self->array == NULL)
+    if (da->array == NULL)
     {
         fprintf(stderr, "da_clear: array is NULL\n");
         return -1;
     }
     if (free_handler != NULL)
     {
-        for (size_t i = 0; i < self->size; i++)
+        for (size_t i = 0; i < da->size; i++)
         {
-            free_handler(self->array[i]);
+            free_handler(da->array[i]);
         }
     }
-    self->size = 0;
+    da->size = 0;
     return 0;
 }
 
-void *da_insert(da_t *self, size_t index, void *data)
+void *da_insert(da_t *da, size_t index, void *data)
 {
-    if (self == NULL)
+    if (da == NULL)
     {
-        fprintf(stderr, "da_insert: given parameter is NULL\n");
+        fprintf(stderr, "da_insert: da is NULL\n");
         return NULL;
     }
-    if (self->array == NULL)
+    if (da->array == NULL)
     {
         fprintf(stderr, "da_insert: array is NULL\n");
         return NULL;
     }
-    if (index > self->size)
+    if (index > da->size)
     {
         fprintf(stderr, "da_insert: index out of bounds\n");
         return NULL;
     }
-    if (self->size == self->capacity)
+    if (da->size == da->capacity)
     {
-        self->capacity *= 2;
-        self->array = realloc(self->array, sizeof(void *) * self->capacity);
-        if (self->array == NULL)
+        da->capacity *= 2;
+        da->array = realloc(da->array, sizeof(void *) * da->capacity);
+        if (da->array == NULL)
         {
             fprintf(stderr, "da_insert: realloc failed\n");
             return NULL;
         }
     }
-    for (size_t i = self->size; i > index; i--)
+    for (size_t i = da->size; i > index; i--)
     {
-        self->array[i] = self->array[i - 1];
+        da->array[i] = da->array[i - 1];
     }
-    self->array[index] = data;
-    self->size++;
+    da->array[index] = data;
+    da->size++;
     return data;
 }
 
-size_t da_search(da_t *self, void *data, int (*cmp)(void *, void *))
+size_t da_search(da_t *da, void *data, int (*cmp)(void *, void *))
 {
-    if (self == NULL)
+    if (da == NULL)
     {
-        fprintf(stderr, "da_search: given parameter is NULL\n");
+        fprintf(stderr, "da_search: da is NULL\n");
         return -1;
     }
-    if (self->array == NULL)
+    if (da->array == NULL)
     {
         fprintf(stderr, "da_search: array is NULL\n");
         return -1;
@@ -209,9 +234,9 @@ size_t da_search(da_t *self, void *data, int (*cmp)(void *, void *))
         fprintf(stderr, "da_search: cmp is NULL\n");
         return -1;
     }
-    for (size_t i = 0; i < self->size; i++)
+    for (size_t i = 0; i < da->size; i++)
     {
-        if (cmp(self->array[i], data) == 0)
+        if (cmp(da->array[i], data) == 0)
         {
             return i;
         }
@@ -219,14 +244,14 @@ size_t da_search(da_t *self, void *data, int (*cmp)(void *, void *))
     return -1;
 }
 
-int da_print(da_t *self, FILE *fd, char *(*to_string)(void *))
+int da_print(da_t *da, FILE *fd, char *(*to_string)(void *))
 {
-    if (self == NULL)
+    if (da == NULL)
     {
-        fprintf(stderr, "da_print: given parameter is NULL\n");
+        fprintf(stderr, "da_print: da is NULL\n");
         return -1;
     }
-    if (self->array == NULL)
+    if (da->array == NULL)
     {
         fprintf(stderr, "da_print: array is NULL\n");
         return -1;
@@ -247,9 +272,9 @@ int da_print(da_t *self, FILE *fd, char *(*to_string)(void *))
         fprintf(stderr, "da_print: fwrite failed\n");
         return -1;
     }
-    for (size_t i = 0; i < self->size; i++)
+    for (size_t i = 0; i < da->size; i++)
     {
-        char *str = to_string(self->array[i]);
+        char *str = to_string(da->array[i]);
         written_bytes = fwrite(str, 1, strlen(str), fd);
         if (written_bytes != strlen(str))
         {
@@ -257,7 +282,7 @@ int da_print(da_t *self, FILE *fd, char *(*to_string)(void *))
             return -1;
         }
         free(str);
-        if (i < self->size - 1)
+        if (i < da->size - 1)
         {
             written_bytes = fwrite(", ", 1, 2, fd);
             if (written_bytes != 2)

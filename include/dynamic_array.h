@@ -53,67 +53,85 @@ da_t *da_new(size_t capacity);
 /**
  * @brief Free the dynamic array
  *
- * @param self  The dynamic array
- * 
+ * @param da  The dynamic array
+ *
  * @attention  This function does not free the data in the array. It only frees
- *           the array itself.
+ *           the array itda.
  *
  * @return        operation status
  * @retval 0      If the operation was successful
  * @retval -1     If the operation failed
  */
-int da_free(da_t *self);
+int da_free(da_t *da);
+
+/**
+ * @brief Get the size of the array
+ *
+ * @param da  The dynamic array
+ *
+ * @return  size of the array
+ * @retval -1  If the operation failed
+ */
+size_t da_size(da_t *da);
+
+/**
+ * @brief Get the size of the capacity
+ * 
+ * @param da  The dynamic array
+ * 
+ * @return  capacity of the array
+ * @retval -1  If the operation failed
+*/
 
 /**
  * @brief Add an element to the end of the array
  *
- * @param self  The dynamic array
+ * @param da  The dynamic array
  * @param data  The data to be added
  *
  * @return data that was added
  * @retval NULL   If the operation failed
  */
-void *da_push_back(da_t *self, void *data);
+void *da_push_back(da_t *da, void *data);
 
 /**
  * @brief Updates the element at the given index
  *
- * @param self  The dynamic array
+ * @param da  The dynamic array
  * @param index The index of the element to be updated
  * @param data  The data to be updated
  *
  * @return  previous data at the given index
  * @retval  NULL    If the operation failed
  */
-void *da_set(da_t *self, size_t index, void *data);
+void *da_set(da_t *da, size_t index, void *data);
 
 /**
  * @brief Get the element at the given index
  *
- * @param self  The dynamic array
+ * @param da  The dynamic array
  * @param index The index of the element to be retrieved
  *
  * @return  data at the given index
  * @retval  NULL    If the operation failed
  */
-void *da_get(da_t *self, size_t index);
+void *da_get(da_t *da, size_t index);
 
 /**
  * @brief Remove the element at the given index
  *
- * @param self  The dynamic array
+ * @param da  The dynamic array
  * @param index The index of the element to be removed
  *
  * @return  data at the given index
  * @retval  NULL    If the operation failed
  */
-void *da_remove(da_t *self, size_t index);
+void *da_remove(da_t *da, size_t index);
 
 /**
- * @brief Clears the array and calls the free function on
- *       the data, if provided
+ * @brief Clears the array
  *
- * @param self          The list to clear
+ * @param da          The list to clear
  * @param free_handler  The function to free the data. This
  *                     param can be NULL if the data does
  *                     not need to be freed. But user should
@@ -124,24 +142,24 @@ void *da_remove(da_t *self, size_t index);
  * @retval 0     If the operation was successful
  * @retval -1    If the operation failed
  */
-int da_clear(da_t *self, void (*free_handler)(void *));
+int da_clear(da_t *da, void (*free_handler)(void *));
 
 /**
  * @brief Inserts an element at the given index
  *
- * @param self  The dynamic array
+ * @param da  The dynamic array
  * @param index The index of the element to be inserted
  * @param data  The data to be inserted
  *
  * @return  data that was inserted
  * @retval  NULL    If the operation failed
  */
-void *da_insert(da_t *self, size_t index, void *data);
+void *da_insert(da_t *da, size_t index, void *data);
 
 /**
  * @brief Search for the given data in the array
  *
- * @param self  The dynamic array
+ * @param da  The dynamic array
  * @param data  The data to be searched
  * @param cmp   The comparison function, which should return 0 if the data is
  *             found
@@ -149,14 +167,14 @@ void *da_insert(da_t *self, size_t index, void *data);
  * @return  index of the data
  * @retval  -1  If the data is not found
  */
-size_t da_search(da_t *self, void *data, int (*cmp)(void *, void *));
+size_t da_search(da_t *da, void *data, int (*cmp)(void *, void *));
 
 /**
  * @brief Search for the given data in the array using binary search
  *
  * @attention The array must be sorted before using this function
  *
- * @param self  The dynamic array
+ * @param da  The dynamic array
  * @param data  The data to be searched
  * @param cmp   The comparison function, which should return 0 if the data is
  *           found, -1 if the data is less than the element in the array, and 1
@@ -165,54 +183,54 @@ size_t da_search(da_t *self, void *data, int (*cmp)(void *, void *));
  * @return  index of the data
  * @retval  -1  If the data is not found
  */
-size_t da_binary_search(da_t *self, void *data, int (*cmp)(void *, void *));
+size_t da_binary_search(da_t *da, void *data, int (*cmp)(void *, void *));
 
 /**
  * @brief Sort the array in place using the given comparison function
  *
- * @param self  The dynamic array
+ * @param da  The dynamic array
  * @param cmp   The comparison function, which should return -1 if the first
  *            element is less than the second, 0 if they are equal, and 1 if the
  *            first element is greater than the second
  *
  * @note This function uses quick sort algorithm.
  *
- * @return `self` as a sorted array
+ * @return `da` as a sorted array
  */
-da_t *da_sort(da_t *self, int (*cmp)(void *, void *));
+da_t *da_sort(da_t *da, int (*cmp)(void *, void *));
 
 /**
  * @brief Reverses the array in place
  *
- * @param self  The dynamic array
+ * @param da  The dynamic array
  *
- * @return `self` as a reversed array
+ * @return `da` as a reversed array
  */
-da_t *da_reverse(da_t *self);
+da_t *da_reverse(da_t *da);
 
 /**
  * @brief Shrinks the capacity of the array to the size of the array
- * 
+ *
  * @details This function is useful when the array is not going to be used
  *         for a while and the memory can be freed.
- * 
- * @param self  The dynamic array
- * 
- * @return `self` as a shrunk array
+ *
+ * @param da  The dynamic array
+ *
+ * @return `da` as a shrunk array
  */
-da_t *da_shrink(da_t *self);
+da_t *da_shrink(da_t *da);
 
 /**
  * @brief Prints the array to the given file descriptior
- * 
- * @param self  The dynamic array
+ *
+ * @param da  The dynamic array
  * @param fd    The file descriptor
  * @param to_string The function to convert the data to string
- * 
+ *
  * @return The status of the operation
  * @retval 1, If an error occurred
  * @retval 0, If the list is printed successfully
  */
-int da_print(da_t *self, FILE *fd, char *(*to_string)(void *));
+int da_print(da_t *da, FILE *fd, char *(*to_string)(void *));
 
 #endif
