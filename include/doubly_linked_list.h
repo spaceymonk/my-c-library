@@ -60,8 +60,6 @@ typedef struct dll
 /**
  * @brief Creates a new doubly linked list
  *
- * @note If allocation fails an error message will be printed to stderr
- *
  * @return The new list
  * @retval NULL If the allocation failed
  */
@@ -70,21 +68,30 @@ dll_t *dll_new();
 /**
  * @brief Frees the list
  *
- * @param self  The list to free
+ * @param dll  The list to free
  * 
  * @attention List size should be 0 prior to calling this function
- * @note If the list size is not 0, an error message will be printed to stderr
  *
  * @return  The status of the operation
- * @retval  1, If the list an error occurred
+ * @retval -1, If the list an error occurred
  * @retval  0, If the list is freed successfully
  */
-int dll_free(dll_t *self);
+int dll_free(dll_t *dll);
+
+/**
+ * @brief Get the size of the list
+ * 
+ * @param dll  The list to get the size of
+ * 
+ * @return The size of the list
+ * @retval -1 If an error occurred
+ */
+size_t dll_size(dll_t *dll);
 
 /**
  * @brief Prints the list to given file descriptor
  *
- * @param self The list to print
+ * @param dll The list to print
  * @param fd The file descriptor to print to
  * @param to_string A function that converts the data to string
  *                 to be printed. This function should return
@@ -92,154 +99,134 @@ int dll_free(dll_t *self);
  *                 the heap. The `dll_print` function will free
  *                 the string after printing it.
  *
- * @note If allocation fails an error message will be printed to stderr
- *
  * @return The status of the operation
- * @retval 1, If an error occurred
+ * @retval -1, If an error occurred
  * @retval 0, If the list is printed successfully
  */
-int dll_print(dll_t *self, FILE *fd, char *(*to_string)(void *));
+int dll_print(dll_t *dll, FILE *fd, char *(*to_string)(void *));
 
 /**
  * @brief Pushes data to the back of the list
  *
- * @param self  The list to push to
+ * @param dll  The list to push to
  * @param data  The data to push
  * 
- * @note If allocation fails an error message will be printed to stderr
- *
  * @return The data that was pushed
  * @retval NULL If the allocation failed
  */
-void *dll_push_back(dll_t *self, void *data);
+void *dll_push_back(dll_t *dll, void *data);
 
 /**
  * @brief Pushes data to the front of the list
  *
- * @param self  The list to push to
+ * @param dll  The list to push to
  * @param data  The data to push
  *
- * @note If allocation fails an error message will be printed to stderr
- * 
  * @return The data that was pushed
  * @retval NULL If the allocation failed
  */
-void *dll_push_front(dll_t *self, void *data);
+void *dll_push_front(dll_t *dll, void *data);
 
 /**
  * @brief Pops the last element of the list
  *
- * @param self  The list to pop from
- *
- * @note If the list is empty this function will
- *      print an error message to stderr.
- * 
- * @note If allocation fails an error message will be printed to stderr
+ * @param dll  The list to pop from
  *
  * @return The data that was popped
  * @retval NULL If the list is empty
  */
-void *dll_pop_back(dll_t *self);
+void *dll_pop_back(dll_t *dll);
 
 /**
  * @brief Pops the first element of the list
  *
- * @note If the list is empty this function will
- *      print an error message to stderr.
- *
  * @return The data that was popped
  * @retval NULL if the list is empty
  */
-void *dll_pop_front(dll_t *self);
+void *dll_pop_front(dll_t *dll);
 
 /**
- * @brief Clears the list and frees all nodes by
- *       calling the free function on the data
+ * @brief Clears the list and transforms it into initial state
  *
- * @param self          The list to clear
+ * @param dll          The list to clear
  * @param free_handler  The function to free the data. This
  *                     param can be NULL if the data does
  *                     not need to be freed. But user should
  *                     make sure that the data is freed
  *                     before the list is freed.
  *
- * @return void
+ * @return The status of the operation
+ * @retval -1, If an error occurred
+ * @retval 0, If the list is cleared successfully
  */
-void dll_clear(dll_t *self, void (*free_handler)(void *));
+int dll_clear(dll_t *dll, void (*free_handler)(void *));
 
 /**
  * @brief Inserts data after the given node
  *       and returns the new node
  *
- * @param self  The list to insert to
+ * @param dll  The list to insert to
  * @param node  The node to insert after
  * @param data  The data to insert
  *
  * @return The newly created node
  * @retval NULL If an error occured
  */
-dll_node_t *dll_insert_after(dll_t *self, dll_node_t *node, void *data);
+dll_node_t *dll_insert_after(dll_t *dll, dll_node_t *node, void *data);
 
 /**
  * @brief Inserts data before the given node
  *      and returns the new node
  *
- * @param self  The list to insert to
+ * @param dll  The list to insert to
  * @param node  The node to insert before
  * @param data  The data to insert
- *
- * @note If an error occurs, this function will print
- *     an error message to stderr.
  *
  * @return The new node
  * @retval NULL If an error occured
  */
-dll_node_t *dll_insert_before(dll_t *self, dll_node_t *node, void *data);
+dll_node_t *dll_insert_before(dll_t *dll, dll_node_t *node, void *data);
 
 /**
  * @brief Removes the given node from the list
  *      and returns the data
  *
- * @param self  The list to remove from
+ * @param dll  The list to remove from
  * @param node  The node to remove
- *
- * @note If an error occurs, this function will print
- *    an error message to stderr.
  *
  * @return The data that was removed
  * @retval NULL If an error occured
  */
-void *dll_remove(dll_t *self, dll_node_t *node);
+void *dll_remove(dll_t *dll, dll_node_t *node);
 
 /**
  * @brief Search for the given data in the list
  *       and returns the first node that contains it
  *
- * @param self  The list to search in
+ * @param dll  The list to search in
  * @param data  The data to search for
  * @param cmp   The comparison function to compare the data
  *
- * @note The comparasion function should return 0 if the
- *      data is equal.
- *
- * @return The node that contains the data, NULL if not found
+ * @return The node that contains the data
+ * @retval NULL If the data is not found
+ * @retval NULL If an error occured
  */
-dll_node_t *dll_search(dll_t *self, void *data, int (*cmp)(void *, void *));
+dll_node_t *dll_search(dll_t *dll, void *data, int (*cmp)(void *, void *));
 
 /**
  * @brief Reverses the list in place and returns it
  *
- * @param self  The list to reverse
+ * @param dll  The list to reverse
  *
- * @return `self` as a reversed list
+ * @return `dll` as a reversed list
  */
-dll_t *dll_reverse(dll_t *self);
+dll_t *dll_reverse(dll_t *dll);
 
 /**
  * @brief Sorts the list in place using the given comparision
  *       function and returns the sorted list
  *
- * @param self  The list to sort
+ * @param dll  The list to sort
  * @param cmp   The comparison function to compare the data
  *
  * @note The comparasion function should return 0 if the
@@ -248,9 +235,10 @@ dll_t *dll_reverse(dll_t *self);
  *
  * @note This function uses the merge sort algorithm.
  *
- * @return `self` as a sorted list
+ * @return `dll` as a sorted list
+ * @retval NULL If an error occured
  */
-dll_t *dll_sort(dll_t *self, int (*cmp)(void *, void *));
+dll_t *dll_sort(dll_t *dll, int (*cmp)(void *, void *));
 
 /**
  * @brief Get the middle node of a linked list
@@ -259,6 +247,7 @@ dll_t *dll_sort(dll_t *self, int (*cmp)(void *, void *));
  * @param head  head of the linked list
  *
  * @return  middle node of the linked list
+ * @retval  NULL, if head is NULL
  */
 dll_node_t *__dll_get_middle_node(dll_node_t *head);
 
