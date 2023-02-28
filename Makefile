@@ -13,7 +13,9 @@ LD := gcc
 LDFLAGS := -L$(LIB_DIR)
 
 # Static analysis
-CPPCHECKFLAGS := --enable=all --inconclusive --std=c99 --language=c --check-library
+CPPCHECKFLAGS := --enable=all --inconclusive --std=c99 --language=c \
+				--check-library --suppress=missingIncludeSystem \
+				--suppress=unusedFunction
 
 # Memory leak detection
 VALGRINGFLAGS := --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose
