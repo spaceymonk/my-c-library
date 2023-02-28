@@ -21,10 +21,10 @@ int main()
 
     da_t *da = da_new(10);
 
-    int a = 124;
-    int b = 124;
-    int c = 553;
-    int d = 412;
+    int a = -1;
+    int b = 2;
+    int c = 3;
+    int d = 4;
     // int f = 3;
 
     da_push_back(da, &d);
