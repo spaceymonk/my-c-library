@@ -10,6 +10,7 @@
  */
 
 #include "../include/doubly_linked_list.h"
+#include "../include/utility.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -405,10 +406,7 @@ dll_t *dll_reverse(dll_t *dll)
     dll_node_t *node = dll->head;
     while (node != NULL)
     {
-        dll_node_t *tmp = node->next;
-        node->next = node->prev;
-        node->prev = tmp;
-        node = tmp;
+        swap(&node->next, &node->prev);
     }
     node = dll->head;
     dll->head = dll->tail;
@@ -452,27 +450,27 @@ dll_node_t *__dll_get_middle_node(dll_node_t *head)
     return slow;
 }
 
-dll_node_t *__dll_merge(dll_node_t *head1, dll_node_t *head2, int (*cmp)(void *, void *))
+dll_node_t *__dll_merge(dll_node_t *left, dll_node_t *right, int (*cmp)(void *, void *))
 {
-    if (head1 == NULL)
+    if (left == NULL)
     {
-        return head2;
+        return right;
     }
-    if (head2 == NULL)
+    if (right == NULL)
     {
-        return head1;
+        return left;
     }
-    if (cmp(head1->data, head2->data) < 0)
+    if (cmp(left->data, right->data) < 0)
     {
-        head1->next = __dll_merge(head1->next, head2, cmp);
-        head1->next->prev = head1;
-        head1->prev = NULL;
-        return head1;
+        left->next = __dll_merge(left->next, right, cmp);
+        left->next->prev = left;
+        left->prev = NULL;
+        return left;
     }
-    head2->next = __dll_merge(head1, head2->next, cmp);
-    head2->next->prev = head2;
-    head2->prev = NULL;
-    return head2;
+    right->next = __dll_merge(left, right->next, cmp);
+    right->next->prev = right;
+    right->prev = NULL;
+    return right;
 }
 
 dll_node_t *__dll_sort(dll_node_t *head, int (*cmp)(void *, void *))

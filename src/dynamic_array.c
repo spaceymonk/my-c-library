@@ -1,4 +1,16 @@
+/**
+ * @file dynamic_array.c
+ * @author Berktug K. Ozkan (@spaceymonk)
+ * @brief Implementation of dynamic array functions
+ * @version 0.1
+ * @date 2023-02-28
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
+
 #include "../include/dynamic_array.h"
+#include "../include/utility.h"
 
 #include <string.h>
 
@@ -319,9 +331,7 @@ da_t *da_reverse(da_t *da)
     }
     for (size_t i = 0; i < da->size / 2; i++)
     {
-        void *tmp = da->array[i];
-        da->array[i] = da->array[da->size - i - 1];
-        da->array[da->size - i - 1] = tmp;
+        swap(&da->array[i], &da->array[da->size - i - 1]);
     }
     return da;
 }
@@ -360,16 +370,12 @@ void __da_sort(void **array, size_t size, int (*cmp)(void *, void *))
     {
         if (cmp(array[i], array[pivot]) > 0)
         {
-            void *tmp = array[i];
-            array[i] = array[pivot];
-            array[pivot] = tmp;
+            swap(&array[i], &array[pivot]);
             for (size_t j = pivot; j < size - 1; j++)
             {
                 if (cmp(array[j], array[j + 1]) > 0)
                 {
-                    void *tmp = array[j];
-                    array[j] = array[j + 1];
-                    array[j + 1] = tmp;
+                    swap(&array[j], &array[j + 1]);
                 }
                 else
                 {
