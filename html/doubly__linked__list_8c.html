@@ -75,6 +75,7 @@ $(function() {
 <p>Doubly Linked List implementation.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="doubly__linked__list_8h_source.html">../include/doubly_linked_list.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="utility_8h_source.html">../include/utility.h</a>&quot;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
@@ -129,9 +130,9 @@ Functions</h2></td></tr>
 <tr class="memitem:afb29f7e4ae651f422b18255fff544601"><td class="memItemLeft" align="right" valign="top"><a class="el" href="doubly__linked__list_8h.html#a9ab9c267d0f263946d0b35d9de2f451d">dll_node_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="doubly__linked__list_8c.html#afb29f7e4ae651f422b18255fff544601">__dll_get_middle_node</a> (<a class="el" href="doubly__linked__list_8h.html#a9ab9c267d0f263946d0b35d9de2f451d">dll_node_t</a> *head)</td></tr>
 <tr class="memdesc:afb29f7e4ae651f422b18255fff544601"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the middle node of a linked list.  <a href="doubly__linked__list_8c.html#afb29f7e4ae651f422b18255fff544601">More...</a><br /></td></tr>
 <tr class="separator:afb29f7e4ae651f422b18255fff544601"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae445d73c4b53894f9f1d222a0e0d8b9d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="doubly__linked__list_8h.html#a9ab9c267d0f263946d0b35d9de2f451d">dll_node_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="doubly__linked__list_8c.html#ae445d73c4b53894f9f1d222a0e0d8b9d">__dll_merge</a> (<a class="el" href="doubly__linked__list_8h.html#a9ab9c267d0f263946d0b35d9de2f451d">dll_node_t</a> *head1, <a class="el" href="doubly__linked__list_8h.html#a9ab9c267d0f263946d0b35d9de2f451d">dll_node_t</a> *head2, int(*cmp)(void *, void *))</td></tr>
-<tr class="memdesc:ae445d73c4b53894f9f1d222a0e0d8b9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merge two sorted linked lists.  <a href="doubly__linked__list_8c.html#ae445d73c4b53894f9f1d222a0e0d8b9d">More...</a><br /></td></tr>
-<tr class="separator:ae445d73c4b53894f9f1d222a0e0d8b9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ca931b27a65043d67f2c018a92db4d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="doubly__linked__list_8h.html#a9ab9c267d0f263946d0b35d9de2f451d">dll_node_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="doubly__linked__list_8c.html#a0ca931b27a65043d67f2c018a92db4d0">__dll_merge</a> (<a class="el" href="doubly__linked__list_8h.html#a9ab9c267d0f263946d0b35d9de2f451d">dll_node_t</a> *left, <a class="el" href="doubly__linked__list_8h.html#a9ab9c267d0f263946d0b35d9de2f451d">dll_node_t</a> *right, int(*cmp)(void *, void *))</td></tr>
+<tr class="memdesc:a0ca931b27a65043d67f2c018a92db4d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merge two sorted linked lists.  <a href="doubly__linked__list_8c.html#a0ca931b27a65043d67f2c018a92db4d0">More...</a><br /></td></tr>
+<tr class="separator:a0ca931b27a65043d67f2c018a92db4d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe1a737271f2f90d56a1cca8574dec85"><td class="memItemLeft" align="right" valign="top"><a class="el" href="doubly__linked__list_8h.html#a9ab9c267d0f263946d0b35d9de2f451d">dll_node_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="doubly__linked__list_8c.html#abe1a737271f2f90d56a1cca8574dec85">__dll_sort</a> (<a class="el" href="doubly__linked__list_8h.html#a9ab9c267d0f263946d0b35d9de2f451d">dll_node_t</a> *head, int(*cmp)(void *, void *))</td></tr>
 <tr class="memdesc:abe1a737271f2f90d56a1cca8574dec85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merge sort a linked list from the given head.  <a href="doubly__linked__list_8c.html#abe1a737271f2f90d56a1cca8574dec85">More...</a><br /></td></tr>
 <tr class="separator:abe1a737271f2f90d56a1cca8574dec85"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -160,6 +161,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get the middle node of a linked list. </p>
+<p>This function is used by the <code>dll_sort</code> function to get the middle node of the list to split it into two halves. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="doubly__linked__list_8h.html#aaa0e3b8b6681f1ac1c6177f51f8b65c0" title="Sorts the list in place using the given comparision function and returns the sorted list.">dll_sort</a></dd></dl>
 <dl class="section attention"><dt>Attention</dt><dd>This function is not meant to be used by the user.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -177,8 +179,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ae445d73c4b53894f9f1d222a0e0d8b9d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae445d73c4b53894f9f1d222a0e0d8b9d">&#9670;&nbsp;</a></span>__dll_merge()</h2>
+<a id="a0ca931b27a65043d67f2c018a92db4d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ca931b27a65043d67f2c018a92db4d0">&#9670;&nbsp;</a></span>__dll_merge()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -210,6 +212,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Merge two sorted linked lists. </p>
+<p>This function is used by the <code>dll_sort</code> function to merge two sorted linked lists. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="doubly__linked__list_8h.html#aaa0e3b8b6681f1ac1c6177f51f8b65c0" title="Sorts the list in place using the given comparision function and returns the sorted list.">dll_sort</a></dd></dl>
 <dl class="section attention"><dt>Attention</dt><dd>This function is not meant to be used by the user.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -249,6 +252,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Merge sort a linked list from the given head. </p>
+<p>This function is used by the <code>dll_sort</code> function to sort a linked list using the merge sort algorithm. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="doubly__linked__list_8h.html#aaa0e3b8b6681f1ac1c6177f51f8b65c0" title="Sorts the list in place using the given comparision function and returns the sorted list.">dll_sort</a></dd></dl>
 <dl class="section attention"><dt>Attention</dt><dd>This function is not meant to be used by the user.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">

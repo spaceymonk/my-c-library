@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: include/dynamic_array.h File Reference</title>
+<title>My Project: src/dynamic_array.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,122 +61,84 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">dynamic_array.h File Reference</div>  </div>
+<div class="title">dynamic_array.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Dynamic Array interface.  
+<p>Implementation of dynamic array functions.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &lt;stdlib.h&gt;</code><br />
-</div>
-<p><a href="dynamic__array_8h_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structda.html">da</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A dynamic array structure.  <a href="structda.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a18175cccd52e4cb51266ff85e1a749f2"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structda.html">da</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a></td></tr>
-<tr class="memdesc:a18175cccd52e4cb51266ff85e1a749f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">A dynamic array structure.  <a href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">More...</a><br /></td></tr>
-<tr class="separator:a18175cccd52e4cb51266ff85e1a749f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
+<div class="textblock"><code>#include &quot;<a class="el" href="dynamic__array_8h_source.html">../include/dynamic_array.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="utility_8h_source.html">../include/utility.h</a>&quot;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a986707a97f48997d19ac1f860fe15e50"><td class="memItemLeft" align="right" valign="top"><a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8h.html#a986707a97f48997d19ac1f860fe15e50">da_new</a> (size_t capacity)</td></tr>
-<tr class="memdesc:a986707a97f48997d19ac1f860fe15e50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a dynamic array.  <a href="dynamic__array_8h.html#a986707a97f48997d19ac1f860fe15e50">More...</a><br /></td></tr>
+<tr class="memitem:a986707a97f48997d19ac1f860fe15e50"><td class="memItemLeft" align="right" valign="top"><a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8c.html#a986707a97f48997d19ac1f860fe15e50">da_new</a> (size_t capacity)</td></tr>
+<tr class="memdesc:a986707a97f48997d19ac1f860fe15e50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a dynamic array.  <a href="dynamic__array_8c.html#a986707a97f48997d19ac1f860fe15e50">More...</a><br /></td></tr>
 <tr class="separator:a986707a97f48997d19ac1f860fe15e50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7510ca15a2bb36e1b00d1563015d4dd1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8h.html#a7510ca15a2bb36e1b00d1563015d4dd1">da_free</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>)</td></tr>
-<tr class="memdesc:a7510ca15a2bb36e1b00d1563015d4dd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free the dynamic array.  <a href="dynamic__array_8h.html#a7510ca15a2bb36e1b00d1563015d4dd1">More...</a><br /></td></tr>
+<tr class="memitem:a7510ca15a2bb36e1b00d1563015d4dd1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8c.html#a7510ca15a2bb36e1b00d1563015d4dd1">da_free</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>)</td></tr>
+<tr class="memdesc:a7510ca15a2bb36e1b00d1563015d4dd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free the dynamic array.  <a href="dynamic__array_8c.html#a7510ca15a2bb36e1b00d1563015d4dd1">More...</a><br /></td></tr>
 <tr class="separator:a7510ca15a2bb36e1b00d1563015d4dd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae52474617bf5cc7c702d590f1c69e932"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8h.html#ae52474617bf5cc7c702d590f1c69e932">da_size</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>)</td></tr>
-<tr class="memdesc:ae52474617bf5cc7c702d590f1c69e932"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the size of the array.  <a href="dynamic__array_8h.html#ae52474617bf5cc7c702d590f1c69e932">More...</a><br /></td></tr>
+<tr class="memitem:ae52474617bf5cc7c702d590f1c69e932"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8c.html#ae52474617bf5cc7c702d590f1c69e932">da_size</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>)</td></tr>
+<tr class="memdesc:ae52474617bf5cc7c702d590f1c69e932"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the size of the array.  <a href="dynamic__array_8c.html#ae52474617bf5cc7c702d590f1c69e932">More...</a><br /></td></tr>
 <tr class="separator:ae52474617bf5cc7c702d590f1c69e932"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ca7160c89502dfc2a2d13b6daf7ef74"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8h.html#a8ca7160c89502dfc2a2d13b6daf7ef74">da_push_back</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>, void *data)</td></tr>
-<tr class="memdesc:a8ca7160c89502dfc2a2d13b6daf7ef74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the size of the capacity.  <a href="dynamic__array_8h.html#a8ca7160c89502dfc2a2d13b6daf7ef74">More...</a><br /></td></tr>
+<tr class="memitem:a75679cb0312cbbca2ecbf1f6b5058c7d"><td class="memItemLeft" align="right" valign="top"><a id="a75679cb0312cbbca2ecbf1f6b5058c7d"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>da_capacity</b> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>)</td></tr>
+<tr class="separator:a75679cb0312cbbca2ecbf1f6b5058c7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ca7160c89502dfc2a2d13b6daf7ef74"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8c.html#a8ca7160c89502dfc2a2d13b6daf7ef74">da_push_back</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>, void *data)</td></tr>
+<tr class="memdesc:a8ca7160c89502dfc2a2d13b6daf7ef74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the size of the capacity.  <a href="dynamic__array_8c.html#a8ca7160c89502dfc2a2d13b6daf7ef74">More...</a><br /></td></tr>
 <tr class="separator:a8ca7160c89502dfc2a2d13b6daf7ef74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb8d61d136b346b76970e3f614e19b62"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8h.html#aeb8d61d136b346b76970e3f614e19b62">da_set</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>, size_t index, void *data)</td></tr>
-<tr class="memdesc:aeb8d61d136b346b76970e3f614e19b62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the element at the given index.  <a href="dynamic__array_8h.html#aeb8d61d136b346b76970e3f614e19b62">More...</a><br /></td></tr>
+<tr class="memitem:aeb8d61d136b346b76970e3f614e19b62"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8c.html#aeb8d61d136b346b76970e3f614e19b62">da_set</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>, size_t index, void *data)</td></tr>
+<tr class="memdesc:aeb8d61d136b346b76970e3f614e19b62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the element at the given index.  <a href="dynamic__array_8c.html#aeb8d61d136b346b76970e3f614e19b62">More...</a><br /></td></tr>
 <tr class="separator:aeb8d61d136b346b76970e3f614e19b62"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c88f5c9f7c77eadab0def2fbd9928d9"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8h.html#a4c88f5c9f7c77eadab0def2fbd9928d9">da_get</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>, size_t index)</td></tr>
-<tr class="memdesc:a4c88f5c9f7c77eadab0def2fbd9928d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the element at the given index.  <a href="dynamic__array_8h.html#a4c88f5c9f7c77eadab0def2fbd9928d9">More...</a><br /></td></tr>
+<tr class="memitem:a4c88f5c9f7c77eadab0def2fbd9928d9"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8c.html#a4c88f5c9f7c77eadab0def2fbd9928d9">da_get</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>, size_t index)</td></tr>
+<tr class="memdesc:a4c88f5c9f7c77eadab0def2fbd9928d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the element at the given index.  <a href="dynamic__array_8c.html#a4c88f5c9f7c77eadab0def2fbd9928d9">More...</a><br /></td></tr>
 <tr class="separator:a4c88f5c9f7c77eadab0def2fbd9928d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ccfc53f9fb0d3f841bd13678afcaf82"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8h.html#a0ccfc53f9fb0d3f841bd13678afcaf82">da_remove</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>, size_t index)</td></tr>
-<tr class="memdesc:a0ccfc53f9fb0d3f841bd13678afcaf82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove the element at the given index.  <a href="dynamic__array_8h.html#a0ccfc53f9fb0d3f841bd13678afcaf82">More...</a><br /></td></tr>
+<tr class="memitem:a0ccfc53f9fb0d3f841bd13678afcaf82"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8c.html#a0ccfc53f9fb0d3f841bd13678afcaf82">da_remove</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>, size_t index)</td></tr>
+<tr class="memdesc:a0ccfc53f9fb0d3f841bd13678afcaf82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove the element at the given index.  <a href="dynamic__array_8c.html#a0ccfc53f9fb0d3f841bd13678afcaf82">More...</a><br /></td></tr>
 <tr class="separator:a0ccfc53f9fb0d3f841bd13678afcaf82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b6b7016fc57f16153ce93f60ca8c02b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8h.html#a1b6b7016fc57f16153ce93f60ca8c02b">da_clear</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>, void(*free_handler)(void *))</td></tr>
-<tr class="memdesc:a1b6b7016fc57f16153ce93f60ca8c02b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the array.  <a href="dynamic__array_8h.html#a1b6b7016fc57f16153ce93f60ca8c02b">More...</a><br /></td></tr>
+<tr class="memitem:a1b6b7016fc57f16153ce93f60ca8c02b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8c.html#a1b6b7016fc57f16153ce93f60ca8c02b">da_clear</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>, void(*free_handler)(void *))</td></tr>
+<tr class="memdesc:a1b6b7016fc57f16153ce93f60ca8c02b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the array.  <a href="dynamic__array_8c.html#a1b6b7016fc57f16153ce93f60ca8c02b">More...</a><br /></td></tr>
 <tr class="separator:a1b6b7016fc57f16153ce93f60ca8c02b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96e6df7b66487a0638a03d2a63d52ecb"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8h.html#a96e6df7b66487a0638a03d2a63d52ecb">da_insert</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>, size_t index, void *data)</td></tr>
-<tr class="memdesc:a96e6df7b66487a0638a03d2a63d52ecb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts an element at the given index.  <a href="dynamic__array_8h.html#a96e6df7b66487a0638a03d2a63d52ecb">More...</a><br /></td></tr>
+<tr class="memitem:a96e6df7b66487a0638a03d2a63d52ecb"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8c.html#a96e6df7b66487a0638a03d2a63d52ecb">da_insert</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>, size_t index, void *data)</td></tr>
+<tr class="memdesc:a96e6df7b66487a0638a03d2a63d52ecb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts an element at the given index.  <a href="dynamic__array_8c.html#a96e6df7b66487a0638a03d2a63d52ecb">More...</a><br /></td></tr>
 <tr class="separator:a96e6df7b66487a0638a03d2a63d52ecb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ff6f57f1031b52d7f3f8370107057cc"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8h.html#a9ff6f57f1031b52d7f3f8370107057cc">da_search</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>, void *data, int(*cmp)(void *, void *))</td></tr>
-<tr class="memdesc:a9ff6f57f1031b52d7f3f8370107057cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search for the given data in the array.  <a href="dynamic__array_8h.html#a9ff6f57f1031b52d7f3f8370107057cc">More...</a><br /></td></tr>
+<tr class="memitem:a9ff6f57f1031b52d7f3f8370107057cc"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8c.html#a9ff6f57f1031b52d7f3f8370107057cc">da_search</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>, void *data, int(*cmp)(void *, void *))</td></tr>
+<tr class="memdesc:a9ff6f57f1031b52d7f3f8370107057cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search for the given data in the array.  <a href="dynamic__array_8c.html#a9ff6f57f1031b52d7f3f8370107057cc">More...</a><br /></td></tr>
 <tr class="separator:a9ff6f57f1031b52d7f3f8370107057cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7749149edcce815d8ce79fb4e7c312ac"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8h.html#a7749149edcce815d8ce79fb4e7c312ac">da_binary_search</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>, void *data, int(*cmp)(void *, void *))</td></tr>
-<tr class="memdesc:a7749149edcce815d8ce79fb4e7c312ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search for the given data in the array using binary search.  <a href="dynamic__array_8h.html#a7749149edcce815d8ce79fb4e7c312ac">More...</a><br /></td></tr>
+<tr class="memitem:a7749149edcce815d8ce79fb4e7c312ac"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8c.html#a7749149edcce815d8ce79fb4e7c312ac">da_binary_search</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>, void *data, int(*cmp)(void *, void *))</td></tr>
+<tr class="memdesc:a7749149edcce815d8ce79fb4e7c312ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search for the given data in the array using binary search.  <a href="dynamic__array_8c.html#a7749149edcce815d8ce79fb4e7c312ac">More...</a><br /></td></tr>
 <tr class="separator:a7749149edcce815d8ce79fb4e7c312ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01bc53d28ff72f325de32031116ea592"><td class="memItemLeft" align="right" valign="top"><a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8h.html#a01bc53d28ff72f325de32031116ea592">da_sort</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>, int(*cmp)(void *, void *))</td></tr>
-<tr class="memdesc:a01bc53d28ff72f325de32031116ea592"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sort the array in place using the given comparison function.  <a href="dynamic__array_8h.html#a01bc53d28ff72f325de32031116ea592">More...</a><br /></td></tr>
-<tr class="separator:a01bc53d28ff72f325de32031116ea592"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b1fffa9fadf9cf81814a7acab7e3cb1"><td class="memItemLeft" align="right" valign="top">void **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8h.html#a8b1fffa9fadf9cf81814a7acab7e3cb1">__da_sort</a> (void **array, size_t size, int(*cmp)(void *, void *))</td></tr>
-<tr class="memdesc:a8b1fffa9fadf9cf81814a7acab7e3cb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sort the array in place using the given comparison function.  <a href="dynamic__array_8h.html#a8b1fffa9fadf9cf81814a7acab7e3cb1">More...</a><br /></td></tr>
-<tr class="separator:a8b1fffa9fadf9cf81814a7acab7e3cb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e8364116fcb90fa89598714b00fcc42"><td class="memItemLeft" align="right" valign="top"><a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8h.html#a6e8364116fcb90fa89598714b00fcc42">da_reverse</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>)</td></tr>
-<tr class="memdesc:a6e8364116fcb90fa89598714b00fcc42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reverses the array in place.  <a href="dynamic__array_8h.html#a6e8364116fcb90fa89598714b00fcc42">More...</a><br /></td></tr>
-<tr class="separator:a6e8364116fcb90fa89598714b00fcc42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2002fcccf01c9a3d9842764dab8277d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8h.html#af2002fcccf01c9a3d9842764dab8277d">da_shrink</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>)</td></tr>
-<tr class="memdesc:af2002fcccf01c9a3d9842764dab8277d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shrinks the capacity of the array to the size of the array.  <a href="dynamic__array_8h.html#af2002fcccf01c9a3d9842764dab8277d">More...</a><br /></td></tr>
+<tr class="memitem:af2002fcccf01c9a3d9842764dab8277d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8c.html#af2002fcccf01c9a3d9842764dab8277d">da_shrink</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>)</td></tr>
+<tr class="memdesc:af2002fcccf01c9a3d9842764dab8277d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shrinks the capacity of the array to the size of the array.  <a href="dynamic__array_8c.html#af2002fcccf01c9a3d9842764dab8277d">More...</a><br /></td></tr>
 <tr class="separator:af2002fcccf01c9a3d9842764dab8277d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aded99576887e734426e9d6d52dc652a7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8h.html#aded99576887e734426e9d6d52dc652a7">da_print</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>, FILE *fd, char *(*to_string)(void *))</td></tr>
-<tr class="memdesc:aded99576887e734426e9d6d52dc652a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints the array to the given file descriptior.  <a href="dynamic__array_8h.html#aded99576887e734426e9d6d52dc652a7">More...</a><br /></td></tr>
+<tr class="memitem:a6e8364116fcb90fa89598714b00fcc42"><td class="memItemLeft" align="right" valign="top"><a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8c.html#a6e8364116fcb90fa89598714b00fcc42">da_reverse</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>)</td></tr>
+<tr class="memdesc:a6e8364116fcb90fa89598714b00fcc42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reverses the array in place.  <a href="dynamic__array_8c.html#a6e8364116fcb90fa89598714b00fcc42">More...</a><br /></td></tr>
+<tr class="separator:a6e8364116fcb90fa89598714b00fcc42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01bc53d28ff72f325de32031116ea592"><td class="memItemLeft" align="right" valign="top"><a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8c.html#a01bc53d28ff72f325de32031116ea592">da_sort</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>, int(*cmp)(void *, void *))</td></tr>
+<tr class="memdesc:a01bc53d28ff72f325de32031116ea592"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sort the array in place using the given comparison function.  <a href="dynamic__array_8c.html#a01bc53d28ff72f325de32031116ea592">More...</a><br /></td></tr>
+<tr class="separator:a01bc53d28ff72f325de32031116ea592"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b1fffa9fadf9cf81814a7acab7e3cb1"><td class="memItemLeft" align="right" valign="top">void **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8c.html#a8b1fffa9fadf9cf81814a7acab7e3cb1">__da_sort</a> (void **array, size_t size, int(*cmp)(void *, void *))</td></tr>
+<tr class="memdesc:a8b1fffa9fadf9cf81814a7acab7e3cb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sort the array in place using the given comparison function.  <a href="dynamic__array_8c.html#a8b1fffa9fadf9cf81814a7acab7e3cb1">More...</a><br /></td></tr>
+<tr class="separator:a8b1fffa9fadf9cf81814a7acab7e3cb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aded99576887e734426e9d6d52dc652a7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamic__array_8c.html#aded99576887e734426e9d6d52dc652a7">da_print</a> (<a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a> *<a class="el" href="structda.html">da</a>, FILE *fd, char *(*to_string)(void *))</td></tr>
+<tr class="memdesc:aded99576887e734426e9d6d52dc652a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints the array to the given file descriptior.  <a href="dynamic__array_8c.html#aded99576887e734426e9d6d52dc652a7">More...</a><br /></td></tr>
 <tr class="separator:aded99576887e734426e9d6d52dc652a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Dynamic Array interface. </p>
+<div class="textblock"><p>Implementation of dynamic array functions. </p>
 <dl class="section author"><dt>Author</dt><dd>Berktug K. Ozkan (@spaceymonk) </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2023-02-26</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2023-02-28</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2023 </dd></dl>
-</div><h2 class="groupheader">Typedef Documentation</h2>
-<a id="a18175cccd52e4cb51266ff85e1a749f2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18175cccd52e4cb51266ff85e1a749f2">&#9670;&nbsp;</a></span>da_t</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef struct <a class="el" href="structda.html">da</a> <a class="el" href="dynamic__array_8h.html#a18175cccd52e4cb51266ff85e1a749f2">da_t</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>A dynamic array structure. </p>
-<dl class="section attention"><dt>Attention</dt><dd>Do not modify this struct directly. Use the functions provided in this header.</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">array</td><td>The array </td></tr>
-    <tr><td class="paramname">size</td><td>The size of the array </td></tr>
-    <tr><td class="paramname">capacity</td><td>The capacity of the array </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="a8b1fffa9fadf9cf81814a7acab7e3cb1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8b1fffa9fadf9cf81814a7acab7e3cb1">&#9670;&nbsp;</a></span>__da_sort()</h2>
 
