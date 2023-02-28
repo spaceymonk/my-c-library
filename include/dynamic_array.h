@@ -228,7 +228,7 @@ da_t *da_shrink(da_t *da);
  * @param to_string The function to convert the data to string
  *
  * @return The status of the operation
- * @retval 1, If an error occurred
+ * @retval -1, If an error occurred
  * @retval 0, If the list is printed successfully
  */
 int da_print(da_t *da, FILE *fd, char *(*to_string)(void *));
