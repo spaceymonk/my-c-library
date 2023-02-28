@@ -12,6 +12,12 @@ CFLAGS := -Wall -Wextra -Werror -pedantic -std=c99 -g -I$(INC_DIR)
 LD := gcc
 LDFLAGS := -L$(LIB_DIR)
 
+# Static analysis
+CPPCHECKFLAGS := --enable=all --inconclusive --std=c99 --language=c --check-library
+
+# Memory leak detection
+VALGRINGFLAGS := --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose
+
 # Libraries
 LIBS := -lm
 
@@ -27,8 +33,9 @@ OBJ := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 BIN := $(BIN_DIR)/main
 
 # Rules
-.PHONY: all clean
+.PHONY: all clean debug test docs check
 
+# Compile without debug flags
 all: $(BIN)
 
 $(BIN): $(OBJ)
@@ -39,6 +46,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+# Compile with debug flags
 debug: CFLAGS += -DDEBUG -g
 debug: all
 
@@ -46,7 +54,13 @@ clean:
 	rm -rf $(OBJ_DIR) $(BIN_DIR)
 
 # Test against memory leaks with valgrind
-.PHONY: test
-
 test: $(BIN)
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose $(BIN)
+	valgrind $(VALGRINGFLAGS) $(BIN)
+
+# run doxygen to generate documentation
+docs:
+	doxygen doxygen.cfg
+
+# run cppcheck to check for errors
+check:
+	cppcheck $(CPPCHECKFLAGS) $(SRC_DIR) $(INC_DIR)
