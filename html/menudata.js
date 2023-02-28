@@ -36,6 +36,6 @@ var menudata={children:[
 {text:"s",url:"globals.html#index_s"}]},
 {text:"Functions",url:"globals_func.html",children:[
 {text:"_",url:"globals_func.html#index__5F"},
-{text:"d",url:"globals_func.html#index_d"},
-{text:"s",url:"globals_func.html#index_s"}]},
-{text:"Typedefs",url:"globals_type.html"}]}]}]}
+{text:"d",url:"globals_func.html#index_d"}]},
+{text:"Typedefs",url:"globals_type.html"},
+{text:"Macros",url:"globals_defs.html"}]}]}]}

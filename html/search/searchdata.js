@@ -3,8 +3,9 @@ var indexSectionsWithContent =
   0: "_dsu",
   1: "d",
   2: "du",
-  3: "_ds",
-  4: "d"
+  3: "_d",
+  4: "d",
+  5: "s"
 };
 
 var indexSectionNames =
@@ -13,7 +14,8 @@ var indexSectionNames =
   1: "classes",
   2: "files",
   3: "functions",
-  4: "typedefs"
+  4: "typedefs",
+  5: "defines"
 };
 
 var indexSectionLabels =
@@ -22,6 +24,7 @@ var indexSectionLabels =
   1: "Classes",
   2: "Files",
   3: "Functions",
-  4: "Typedefs"
+  4: "Typedefs",
+  5: "Macros"
 };
 

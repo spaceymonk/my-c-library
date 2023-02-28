@@ -66,7 +66,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
 <div class="title">utility.h File Reference</div>  </div>
 </div><!--header-->
@@ -77,11 +77,11 @@ $(function() {
 
 <p><a href="utility_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a65fb3038fc2b214b1e80142022812fcf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utility_8h.html#a65fb3038fc2b214b1e80142022812fcf">swap</a> (void **a, void **b)</td></tr>
-<tr class="memdesc:a65fb3038fc2b214b1e80142022812fcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swaps the values of two pointers.  <a href="utility_8h.html#a65fb3038fc2b214b1e80142022812fcf">More...</a><br /></td></tr>
-<tr class="separator:a65fb3038fc2b214b1e80142022812fcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a315c65c304b5d4a7dc6abb7f461c7e30"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utility_8h.html#a315c65c304b5d4a7dc6abb7f461c7e30">SWAP</a>(a,  b,  T)</td></tr>
+<tr class="memdesc:a315c65c304b5d4a7dc6abb7f461c7e30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swaps the values of two variables.  <a href="utility_8h.html#a315c65c304b5d4a7dc6abb7f461c7e30">More...</a><br /></td></tr>
+<tr class="separator:a315c65c304b5d4a7dc6abb7f461c7e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Utility functions declarations. </p>
@@ -89,24 +89,30 @@ Functions</h2></td></tr>
 <dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2023-02-28</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2023 </dd></dl>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a id="a65fb3038fc2b214b1e80142022812fcf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65fb3038fc2b214b1e80142022812fcf">&#9670;&nbsp;</a></span>swap()</h2>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a315c65c304b5d4a7dc6abb7f461c7e30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a315c65c304b5d4a7dc6abb7f461c7e30">&#9670;&nbsp;</a></span>SWAP</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void swap </td>
+          <td class="memname">#define SWAP</td>
           <td>(</td>
-          <td class="paramtype">void **&#160;</td>
-          <td class="paramname"><em>a</em>, </td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void **&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">T&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -115,12 +121,19 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Swaps the values of two pointers. </p>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span>                \</div>
+<div class="line">    {                 \</div>
+<div class="line">        T temp = a;   \</div>
+<div class="line">        a = b;        \</div>
+<div class="line">        b = temp;     \</div>
+<div class="line">    } <span class="keywordflow">while</span> (0)</div>
+</div><!-- fragment -->
+<p>Swaps the values of two variables. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">a</td><td>Pointer to the first value </td></tr>
-    <tr><td class="paramname">b</td><td>Pointer to the second value </td></tr>
+    <tr><td class="paramname">a</td><td>First value </td></tr>
+    <tr><td class="paramname">b</td><td>Second value </td></tr>
+    <tr><td class="paramname">T</td><td>Type of the values </td></tr>
   </table>
   </dd>
 </dl>
