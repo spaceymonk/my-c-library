@@ -18,6 +18,6 @@
  * @param a Pointer to the first value
  * @param b Pointer to the second value
  */
-void swap(void *a, void *b);
+void swap(void **a, void **b);
 
 #endif

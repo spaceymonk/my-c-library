@@ -357,11 +357,11 @@ da_t *da_sort(da_t *da, int (*cmp)(void *, void *))
     return da;
 }
 
-void __da_sort(void **array, size_t size, int (*cmp)(void *, void *))
+void **__da_sort(void **array, size_t size, int (*cmp)(void *, void *))
 {
     if (size <= 1)
     {
-        return;
+        return array;
     }
     size_t pivot = size / 2;
     __da_sort(array, pivot, cmp);
@@ -384,6 +384,7 @@ void __da_sort(void **array, size_t size, int (*cmp)(void *, void *))
             }
         }
     }
+    return array;
 }
 
 int da_print(da_t *da, FILE *fd, char *(*to_string)(void *))
