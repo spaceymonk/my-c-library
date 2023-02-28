@@ -244,6 +244,142 @@ size_t da_search(da_t *da, void *data, int (*cmp)(void *, void *))
     return -1;
 }
 
+size_t da_binary_search(da_t *da, void *data, int (*cmp)(void *, void *))
+{
+    if (da == NULL)
+    {
+        fprintf(stderr, "da_binary_search: da is NULL\n");
+        return -1;
+    }
+    if (da->array == NULL)
+    {
+        fprintf(stderr, "da_binary_search: array is NULL\n");
+        return -1;
+    }
+    if (cmp == NULL)
+    {
+        fprintf(stderr, "da_binary_search: cmp is NULL\n");
+        return -1;
+    }
+    size_t left = 0;
+    size_t right = da->size - 1;
+    while (left <= right)
+    {
+        size_t middle = (left + right) / 2;
+        int cmp_result = cmp(da->array[middle], data);
+        if (cmp_result < 0)
+        {
+            left = middle + 1;
+        }
+        else if (cmp_result > 0)
+        {
+            right = middle - 1;
+        }
+        else
+        {
+            return middle;
+        }
+    }
+    return -1;
+}
+
+da_t *da_shrink(da_t *da)
+{
+    if (da == NULL)
+    {
+        fprintf(stderr, "da_shrink: da is NULL\n");
+        return NULL;
+    }
+    if (da->array == NULL)
+    {
+        fprintf(stderr, "da_shrink: array is NULL\n");
+        return NULL;
+    }
+    da->capacity = da->size;
+    da->array = realloc(da->array, sizeof(void *) * da->capacity);
+    if (da->array == NULL)
+    {
+        fprintf(stderr, "da_shrink: realloc failed\n");
+        return NULL;
+    }
+    return da;
+}
+
+da_t *da_reverse(da_t *da)
+{
+    if (da == NULL)
+    {
+        fprintf(stderr, "da_reverse: da is NULL\n");
+        return NULL;
+    }
+    if (da->array == NULL)
+    {
+        fprintf(stderr, "da_reverse: array is NULL\n");
+        return NULL;
+    }
+    for (size_t i = 0; i < da->size / 2; i++)
+    {
+        void *tmp = da->array[i];
+        da->array[i] = da->array[da->size - i - 1];
+        da->array[da->size - i - 1] = tmp;
+    }
+    return da;
+}
+
+da_t *da_sort(da_t *da, int (*cmp)(void *, void *))
+{
+    if (da == NULL)
+    {
+        fprintf(stderr, "da_sort: da is NULL\n");
+        return NULL;
+    }
+    if (da->array == NULL)
+    {
+        fprintf(stderr, "da_sort: array is NULL\n");
+        return NULL;
+    }
+    if (cmp == NULL)
+    {
+        fprintf(stderr, "da_sort: cmp is NULL\n");
+        return NULL;
+    }
+    __da_sort(da->array, da->size, cmp);
+    return da;
+}
+
+void __da_sort(void **array, size_t size, int (*cmp)(void *, void *))
+{
+    if (size <= 1)
+    {
+        return;
+    }
+    size_t pivot = size / 2;
+    __da_sort(array, pivot, cmp);
+    __da_sort(array + pivot, size - pivot, cmp);
+    for (size_t i = 0; i < pivot; i++)
+    {
+        if (cmp(array[i], array[pivot]) > 0)
+        {
+            void *tmp = array[i];
+            array[i] = array[pivot];
+            array[pivot] = tmp;
+            for (size_t j = pivot; j < size - 1; j++)
+            {
+                if (cmp(array[j], array[j + 1]) > 0)
+                {
+                    void *tmp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = tmp;
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+    }
+}
+
 int da_print(da_t *da, FILE *fd, char *(*to_string)(void *))
 {
     if (da == NULL)

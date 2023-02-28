@@ -19,29 +19,34 @@ int int_compare(void *a, void *b)
 int main()
 {
 
-    da_t *da = da_new(1);
+    da_t *da = da_new(10);
 
-    int a = 1;
+    int a = -1;
     int b = 2;
     int c = 3;
     int d = 4;
-    int f = 3;
+    // int f = 3;
 
-    da_push_back(da, &a);
-    da_push_back(da, &b);
-    da_push_back(da, &c);
     da_push_back(da, &d);
+    da_push_back(da, &c);
+    da_push_back(da, &b);
+    da_push_back(da, &a);
 
+    da_print(da, stdout, int_to_string);
+    da_sort(da, int_compare);
     da_print(da, stdout, int_to_string);
     fflush(stdout);
 
-    size_t x = da_search(da, &f, int_compare);
-    printf("x = %zu\n", x);
+    // int x = -1;
+    // int r = da_binary_search(da, &x, int_compare);
+    // printf("r = %d\n", r);
 
-    da_remove(da, x);
-    da_print(da, stdout, int_to_string);
-    fflush(stdout);
+    // size_t x = da_search(da, &f, int_compare);
+    // printf("x = %zu\n", x);
 
+    // da_remove(da, x);
+    // da_print(da, stdout, int_to_string);
+    // fflush(stdout);
 
     da_clear(da, NULL);
     da_free(da);
