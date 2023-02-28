@@ -69,7 +69,7 @@ dll_t *dll_new();
  * @brief Frees the list
  *
  * @param dll  The list to free
- * 
+ *
  * @attention List size should be 0 prior to calling this function
  *
  * @return  The status of the operation
@@ -80,9 +80,9 @@ int dll_free(dll_t *dll);
 
 /**
  * @brief Get the size of the list
- * 
+ *
  * @param dll  The list to get the size of
- * 
+ *
  * @return The size of the list
  * @retval -1 If an error occurred
  */
@@ -110,7 +110,7 @@ int dll_print(dll_t *dll, FILE *fd, char *(*to_string)(void *));
  *
  * @param dll  The list to push to
  * @param data  The data to push
- * 
+ *
  * @return The data that was pushed
  * @retval NULL If the allocation failed
  */
@@ -242,6 +242,12 @@ dll_t *dll_sort(dll_t *dll, int (*cmp)(void *, void *));
 
 /**
  * @brief Get the middle node of a linked list
+ *
+ * @details This function is used by the `dll_sort` function
+ *         to get the middle node of the list to split it
+ *         into two halves.
+ * @see dll_sort
+ *
  * @attention This function is not meant to be used by the user.
  *
  * @param head  head of the linked list
@@ -253,6 +259,11 @@ dll_node_t *__dll_get_middle_node(dll_node_t *head);
 
 /**
  * @brief Merge two sorted linked lists
+ * 
+ * @details This function is used by the `dll_sort` function
+ *         to merge two sorted linked lists.
+ * @see dll_sort
+ * 
  * @attention This function is not meant to be used by the user.
  *
  * @param head1  head of the first sorted linked list
@@ -265,6 +276,11 @@ dll_node_t *__dll_merge(dll_node_t *left, dll_node_t *right,
 
 /**
  * @brief Merge sort a linked list from the given head
+ * 
+ * @details This function is used by the `dll_sort` function to sort
+ *         a linked list using the merge sort algorithm.
+ * @see dll_sort
+ * 
  * @attention This function is not meant to be used by the user.
  *
  * @param head  head of the linked list

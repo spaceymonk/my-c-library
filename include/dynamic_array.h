@@ -76,12 +76,12 @@ size_t da_size(da_t *da);
 
 /**
  * @brief Get the size of the capacity
- * 
+ *
  * @param da  The dynamic array
- * 
+ *
  * @return  capacity of the array
  * @retval -1  If the operation failed
-*/
+ */
 
 /**
  * @brief Add an element to the end of the array
@@ -193,11 +193,29 @@ size_t da_binary_search(da_t *da, void *data, int (*cmp)(void *, void *));
  *            element is less than the second, 0 if they are equal, and 1 if the
  *            first element is greater than the second
  *
- * @note This function uses quick sort algorithm.
+ * @note This function uses quicksort algorithm.
  *
  * @return `da` as a sorted array
  */
 da_t *da_sort(da_t *da, int (*cmp)(void *, void *));
+
+/**
+ * @brief Sort the array in place using the given comparison function
+ *
+ * @details This function is used internally by `da_sort` and should not be used
+ *         by the user. The user should use `da_sort` instead. This function
+ *         quicksort algorithm.
+ * @see da_sort
+ *
+ * @attention This function is not meant to be used by the user.
+ *
+ * @param array The array to be sorted
+ * @param size  The size of the array
+ * @param cmp   The comparison function as described in `da_sort`
+ *
+ * @return `array` as a sorted array
+ */
+void **__da_sort(void **array, size_t size, int (*cmp)(void *, void *));
 
 /**
  * @brief Reverses the array in place
