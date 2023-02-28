@@ -331,7 +331,7 @@ da_t *da_reverse(da_t *da)
     }
     for (size_t i = 0; i < da->size / 2; i++)
     {
-        swap(&da->array[i], &da->array[da->size - i - 1]);
+        SWAP(da->array[i], da->array[da->size - i - 1], void *);
     }
     return da;
 }
@@ -370,12 +370,12 @@ void **__da_sort(void **array, size_t size, int (*cmp)(void *, void *))
     {
         if (cmp(array[i], array[pivot]) > 0)
         {
-            swap(&array[i], &array[pivot]);
+            SWAP(array[i], array[pivot], void *);
             for (size_t j = pivot; j < size - 1; j++)
             {
                 if (cmp(array[j], array[j + 1]) > 0)
                 {
-                    swap(&array[j], &array[j + 1]);
+                    SWAP(array[j], array[j + 1], void *);
                 }
                 else
                 {

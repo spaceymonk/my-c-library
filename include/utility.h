@@ -13,11 +13,19 @@
 #define UTILITY_H
 
 /**
- * @brief Swaps the values of two pointers
+ * @brief Swaps the values of two variables
  *
- * @param a Pointer to the first value
- * @param b Pointer to the second value
+ * @param a First value
+ * @param b Second value
+ * @param T Type of the values
+ *
  */
-void swap(void **a, void **b);
+#define SWAP(a, b, T) \
+    do                \
+    {                 \
+        T temp = a;   \
+        a = b;        \
+        b = temp;     \
+    } while (0)
 
 #endif

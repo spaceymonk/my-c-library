@@ -406,7 +406,7 @@ dll_t *dll_reverse(dll_t *dll)
     dll_node_t *node = dll->head;
     while (node != NULL)
     {
-        swap(&node->next, &node->prev);
+        SWAP(node->next, node->prev, dll_node_t *);
     }
     node = dll->head;
     dll->head = dll->tail;
