@@ -1,5 +1,5 @@
-#include "../include/doubly_linked_list.h"
-#include "../include/dynamic_array.h"
+#include "doubly_linked_list.h"
+#include "dynamic_array.h"
 
 char *int_to_string(void *data)
 {

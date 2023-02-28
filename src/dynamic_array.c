@@ -9,8 +9,8 @@
  * 
  */
 
-#include "../include/dynamic_array.h"
-#include "../include/utility.h"
+#include "dynamic_array.h"
+#include "utility.h"
 
 #include <string.h>
 

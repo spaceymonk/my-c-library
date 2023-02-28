@@ -9,8 +9,8 @@
  *
  */
 
-#include "../include/doubly_linked_list.h"
-#include "../include/utility.h"
+#include "doubly_linked_list.h"
+#include "utility.h"
 
 #include <stdio.h>
 #include <stdlib.h>
