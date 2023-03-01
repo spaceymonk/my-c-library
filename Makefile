@@ -47,7 +47,7 @@ LIBS := -lm
 # ============================================================================ #
 #                                     RULES                                    #
 # ============================================================================ #
-.PHONY: all clean debug memcheck docs check
+.PHONY: all clean debug memcheck docs cppcheck
 
 all: $(TEST_BIN)
 
@@ -92,5 +92,5 @@ memcheck: $(TEST_BIN)
 docs:
 	doxygen doxygen.cfg
 
-check:
+cppcheck:
 	cppcheck $(CPPCHECKFLAGS) $(SRC_DIR) $(TEST_DIR)
