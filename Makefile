@@ -87,8 +87,8 @@ memcheck: $(TEST_BIN)
 # run each test file through valgrind and check for memory leaks
 # if there are any leaks valgrind will return a non-zero exit code
 # which will cause the makefile to exit with an error
-	$(foreach test, $(TEST_BIN), \
-		echo $(test);  valgrind $(VALGRINGFLAGS) $(test);)
+	$(foreach test, $(TEST_BIN),\
+		valgrind $(VALGRINGFLAGS) $(test);)
 
 docs:
 	doxygen doxygen.cfg
