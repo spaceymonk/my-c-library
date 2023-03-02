@@ -1,0 +1,559 @@
+.TH "src/doubly_linked_list.c" 3 "Thu Mar 2 2023" "My Project" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/doubly_linked_list.c \- Doubly Linked List implementation\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'doubly_linked_list\&.h'\fP
+.br
+\fC#include 'utility\&.h'\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBdll_t\fP * \fBdll_new\fP ()"
+.br
+.RI "Creates a new doubly linked list\&. "
+.ti -1c
+.RI "int \fBdll_free\fP (\fBdll_t\fP *\fBdll\fP)"
+.br
+.RI "Frees the list\&. "
+.ti -1c
+.RI "size_t \fBdll_size\fP (\fBdll_t\fP *\fBdll\fP)"
+.br
+.RI "Get the size of the list\&. "
+.ti -1c
+.RI "int \fBdll_print\fP (\fBdll_t\fP *\fBdll\fP, FILE *fd, char *(*to_string)(void *))"
+.br
+.RI "Prints the list to given file descriptor\&. "
+.ti -1c
+.RI "void * \fBdll_push_back\fP (\fBdll_t\fP *\fBdll\fP, void *data)"
+.br
+.RI "Pushes data to the back of the list\&. "
+.ti -1c
+.RI "void * \fBdll_push_front\fP (\fBdll_t\fP *\fBdll\fP, void *data)"
+.br
+.RI "Pushes data to the front of the list\&. "
+.ti -1c
+.RI "void * \fBdll_pop_back\fP (\fBdll_t\fP *\fBdll\fP)"
+.br
+.RI "Pops the last element of the list\&. "
+.ti -1c
+.RI "void * \fBdll_pop_front\fP (\fBdll_t\fP *\fBdll\fP)"
+.br
+.RI "Pops the first element of the list\&. "
+.ti -1c
+.RI "\fBdll_node_t\fP * \fBdll_insert_after\fP (\fBdll_t\fP *\fBdll\fP, \fBdll_node_t\fP *node, void *data)"
+.br
+.RI "Inserts data after the given node and returns the new node\&. "
+.ti -1c
+.RI "\fBdll_node_t\fP * \fBdll_insert_before\fP (\fBdll_t\fP *\fBdll\fP, \fBdll_node_t\fP *node, void *data)"
+.br
+.RI "Inserts data before the given node and returns the new node\&. "
+.ti -1c
+.RI "void * \fBdll_remove\fP (\fBdll_t\fP *\fBdll\fP, \fBdll_node_t\fP *node)"
+.br
+.RI "Removes the given node from the list and returns the data\&. "
+.ti -1c
+.RI "\fBdll_node_t\fP * \fBdll_search\fP (\fBdll_t\fP *\fBdll\fP, void *data, int(*cmp)(void *, void *))"
+.br
+.RI "Search for the given data in the list and returns the first node that contains it\&. "
+.ti -1c
+.RI "int \fBdll_clear\fP (\fBdll_t\fP *\fBdll\fP, void(*free_handler)(void *))"
+.br
+.RI "Clears the list and transforms it into initial state\&. "
+.ti -1c
+.RI "\fBdll_t\fP * \fBdll_reverse\fP (\fBdll_t\fP *\fBdll\fP)"
+.br
+.RI "Reverses the list in place and returns it\&. "
+.ti -1c
+.RI "\fBdll_t\fP * \fBdll_sort\fP (\fBdll_t\fP *\fBdll\fP, int(*cmp)(void *, void *))"
+.br
+.RI "Sorts the list in place using the given comparision function and returns the sorted list\&. "
+.ti -1c
+.RI "\fBdll_node_t\fP * \fB__dll_get_middle_node\fP (\fBdll_node_t\fP *head)"
+.br
+.RI "Get the middle node of a linked list\&. "
+.ti -1c
+.RI "\fBdll_node_t\fP * \fB__dll_merge\fP (\fBdll_node_t\fP *left, \fBdll_node_t\fP *right, int(*cmp)(void *, void *))"
+.br
+.RI "Merge two sorted linked lists\&. "
+.ti -1c
+.RI "\fBdll_node_t\fP * \fB__dll_sort\fP (\fBdll_node_t\fP *head, int(*cmp)(void *, void *))"
+.br
+.RI "Merge sort a linked list from the given head\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Doubly Linked List implementation\&. 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Berktug K\&. Ozkan (@spaceymonk) 
+.RE
+.PP
+\fBVersion\fP
+.RS 4
+0\&.1 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2023-02-26
+.RE
+.PP
+\fBCopyright\fP
+.RS 4
+Copyright (c) 2023 
+.RE
+.PP
+
+.SH "Function Documentation"
+.PP 
+.SS "\fBdll_node_t\fP* __dll_get_middle_node (\fBdll_node_t\fP * head)"
+
+.PP
+Get the middle node of a linked list\&. This function is used by the \fCdll_sort\fP function to get the middle node of the list to split it into two halves\&. 
+.PP
+\fBSee also\fP
+.RS 4
+\fBdll_sort\fP
+.RE
+.PP
+\fBAttention\fP
+.RS 4
+This function is not meant to be used by the user\&.
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIhead\fP head of the linked list
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+middle node of the linked list 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fINULL,if\fP head is NULL 
+.RE
+.PP
+
+.SS "\fBdll_node_t\fP* __dll_merge (\fBdll_node_t\fP * left, \fBdll_node_t\fP * right, int(*)(void *, void *) cmp)"
+
+.PP
+Merge two sorted linked lists\&. This function is used by the \fCdll_sort\fP function to merge two sorted linked lists\&. 
+.PP
+\fBSee also\fP
+.RS 4
+\fBdll_sort\fP
+.RE
+.PP
+\fBAttention\fP
+.RS 4
+This function is not meant to be used by the user\&.
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIhead1\fP head of the first sorted linked list 
+.br
+\fIhead2\fP head of the second sorted linked list
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+head of the merged linked list 
+.RE
+.PP
+
+.SS "\fBdll_node_t\fP* __dll_sort (\fBdll_node_t\fP * head, int(*)(void *, void *) cmp)"
+
+.PP
+Merge sort a linked list from the given head\&. This function is used by the \fCdll_sort\fP function to sort a linked list using the merge sort algorithm\&. 
+.PP
+\fBSee also\fP
+.RS 4
+\fBdll_sort\fP
+.RE
+.PP
+\fBAttention\fP
+.RS 4
+This function is not meant to be used by the user\&.
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIhead\fP head of the linked list
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+head of the sorted linked list 
+.RE
+.PP
+
+.SS "int dll_clear (\fBdll_t\fP * dll, void(*)(void *) free_handler)"
+
+.PP
+Clears the list and transforms it into initial state\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdll\fP The list to clear 
+.br
+\fIfree_handler\fP The function to free the data\&. This param can be NULL if the data does not need to be freed\&. But user should make sure that the data is freed before the list is freed\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The status of the operation 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fI-1,If\fP an error occurred 
+.br
+\fI0,If\fP the list is cleared successfully 
+.RE
+.PP
+
+.SS "int dll_free (\fBdll_t\fP * dll)"
+
+.PP
+Frees the list\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdll\fP The list to free
+.RE
+.PP
+\fBAttention\fP
+.RS 4
+List size should be 0 prior to calling this function
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The status of the operation 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fI-1,If\fP the list an error occurred 
+.br
+\fI0,If\fP the list is freed successfully 
+.RE
+.PP
+
+.SS "\fBdll_node_t\fP* dll_insert_after (\fBdll_t\fP * dll, \fBdll_node_t\fP * node, void * data)"
+
+.PP
+Inserts data after the given node and returns the new node\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdll\fP The list to insert to 
+.br
+\fInode\fP The node to insert after 
+.br
+\fIdata\fP The data to insert
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The newly created node 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fINULL\fP If an error occured 
+.RE
+.PP
+
+.SS "\fBdll_node_t\fP* dll_insert_before (\fBdll_t\fP * dll, \fBdll_node_t\fP * node, void * data)"
+
+.PP
+Inserts data before the given node and returns the new node\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdll\fP The list to insert to 
+.br
+\fInode\fP The node to insert before 
+.br
+\fIdata\fP The data to insert
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The new node 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fINULL\fP If an error occured 
+.RE
+.PP
+
+.SS "\fBdll_t\fP* dll_new ()"
+
+.PP
+Creates a new doubly linked list\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The new list 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fINULL\fP If the allocation failed 
+.RE
+.PP
+
+.SS "void* dll_pop_back (\fBdll_t\fP * dll)"
+
+.PP
+Pops the last element of the list\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdll\fP The list to pop from
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The data that was popped 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fINULL\fP If the list is empty 
+.RE
+.PP
+
+.SS "void* dll_pop_front (\fBdll_t\fP * dll)"
+
+.PP
+Pops the first element of the list\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The data that was popped 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fINULL\fP if the list is empty 
+.RE
+.PP
+
+.SS "int dll_print (\fBdll_t\fP * dll, FILE * fd, char *(*)(void *) to_string)"
+
+.PP
+Prints the list to given file descriptor\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdll\fP The list to print 
+.br
+\fIfd\fP The file descriptor to print to 
+.br
+\fIto_string\fP A function that converts the data to string to be printed\&. This function should return a pointer to a string that is allocated on the heap\&. The \fCdll_print\fP function will free the string after printing it\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The status of the operation 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fI-1,If\fP an error occurred 
+.br
+\fI0,If\fP the list is printed successfully 
+.RE
+.PP
+
+.SS "void* dll_push_back (\fBdll_t\fP * dll, void * data)"
+
+.PP
+Pushes data to the back of the list\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdll\fP The list to push to 
+.br
+\fIdata\fP The data to push
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The data that was pushed 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fINULL\fP If the allocation failed 
+.RE
+.PP
+
+.SS "void* dll_push_front (\fBdll_t\fP * dll, void * data)"
+
+.PP
+Pushes data to the front of the list\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdll\fP The list to push to 
+.br
+\fIdata\fP The data to push
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The data that was pushed 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fINULL\fP If the allocation failed 
+.RE
+.PP
+
+.SS "void* dll_remove (\fBdll_t\fP * dll, \fBdll_node_t\fP * node)"
+
+.PP
+Removes the given node from the list and returns the data\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdll\fP The list to remove from 
+.br
+\fInode\fP The node to remove
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The data that was removed 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fINULL\fP If an error occured 
+.RE
+.PP
+
+.SS "\fBdll_t\fP* dll_reverse (\fBdll_t\fP * dll)"
+
+.PP
+Reverses the list in place and returns it\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdll\fP The list to reverse
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fCdll\fP as a reversed list 
+.RE
+.PP
+
+.SS "\fBdll_node_t\fP* dll_search (\fBdll_t\fP * dll, void * data, int(*)(void *, void *) cmp)"
+
+.PP
+Search for the given data in the list and returns the first node that contains it\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdll\fP The list to search in 
+.br
+\fIdata\fP The data to search for 
+.br
+\fIcmp\fP The comparison function to compare the data
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The node that contains the data 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fINULL\fP If the data is not found 
+.br
+\fINULL\fP If an error occured 
+.RE
+.PP
+
+.SS "size_t dll_size (\fBdll_t\fP * dll)"
+
+.PP
+Get the size of the list\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdll\fP The list to get the size of
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The size of the list 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fI-1\fP If an error occurred 
+.RE
+.PP
+
+.SS "\fBdll_t\fP* dll_sort (\fBdll_t\fP * dll, int(*)(void *, void *) cmp)"
+
+.PP
+Sorts the list in place using the given comparision function and returns the sorted list\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdll\fP The list to sort 
+.br
+\fIcmp\fP The comparison function to compare the data
+.RE
+.PP
+\fBNote\fP
+.RS 4
+The comparasion function should return 0 if the data is equal, negative if the first data is less than the second, and positive otherwise\&.
+.PP
+This function uses the merge sort algorithm\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fCdll\fP as a sorted list 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fINULL\fP If an error occured 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for My Project from the source code\&.

@@ -81,6 +81,7 @@ debug: all
 
 clean:
 	rm -rf $(OUT_DIR)
+	rm -f vgcore.*
 
 memcheck: $(TEST_BIN)
 # run each test file through valgrind and check for memory leaks

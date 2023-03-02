@@ -1,0 +1,550 @@
+.TH "include/dynamic_array.h" 3 "Thu Mar 2 2023" "My Project" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+include/dynamic_array.h \- Dynamic Array interface\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBda\fP"
+.br
+.RI "A dynamic array structure\&. "
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fBda\fP \fBda_t\fP"
+.br
+.RI "A dynamic array structure\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBda_t\fP * \fBda_new\fP (size_t capacity)"
+.br
+.RI "Create a dynamic array\&. "
+.ti -1c
+.RI "int \fBda_free\fP (\fBda_t\fP *\fBda\fP)"
+.br
+.RI "Free the dynamic array\&. "
+.ti -1c
+.RI "size_t \fBda_size\fP (\fBda_t\fP *\fBda\fP)"
+.br
+.RI "Get the size of the array\&. "
+.ti -1c
+.RI "void * \fBda_push_back\fP (\fBda_t\fP *\fBda\fP, void *data)"
+.br
+.RI "Get the size of the capacity\&. "
+.ti -1c
+.RI "void * \fBda_set\fP (\fBda_t\fP *\fBda\fP, size_t index, void *data)"
+.br
+.RI "Updates the element at the given index\&. "
+.ti -1c
+.RI "void * \fBda_get\fP (\fBda_t\fP *\fBda\fP, size_t index)"
+.br
+.RI "Get the element at the given index\&. "
+.ti -1c
+.RI "void * \fBda_remove\fP (\fBda_t\fP *\fBda\fP, size_t index)"
+.br
+.RI "Remove the element at the given index\&. "
+.ti -1c
+.RI "int \fBda_clear\fP (\fBda_t\fP *\fBda\fP, void(*free_handler)(void *))"
+.br
+.RI "Clears the array\&. "
+.ti -1c
+.RI "void * \fBda_insert\fP (\fBda_t\fP *\fBda\fP, size_t index, void *data)"
+.br
+.RI "Inserts an element at the given index\&. "
+.ti -1c
+.RI "size_t \fBda_search\fP (\fBda_t\fP *\fBda\fP, void *data, int(*cmp)(void *, void *))"
+.br
+.RI "Search for the given data in the array\&. "
+.ti -1c
+.RI "size_t \fBda_binary_search\fP (\fBda_t\fP *\fBda\fP, void *data, int(*cmp)(void *, void *))"
+.br
+.RI "Search for the given data in the array using binary search\&. "
+.ti -1c
+.RI "\fBda_t\fP * \fBda_sort\fP (\fBda_t\fP *\fBda\fP, int(*cmp)(void *, void *))"
+.br
+.RI "Sort the array in place using the given comparison function\&. "
+.ti -1c
+.RI "void ** \fB__da_sort\fP (void **array, size_t size, int(*cmp)(void *, void *))"
+.br
+.RI "Sort the array in place using the given comparison function\&. "
+.ti -1c
+.RI "\fBda_t\fP * \fBda_reverse\fP (\fBda_t\fP *\fBda\fP)"
+.br
+.RI "Reverses the array in place\&. "
+.ti -1c
+.RI "\fBda_t\fP * \fBda_shrink\fP (\fBda_t\fP *\fBda\fP)"
+.br
+.RI "Shrinks the capacity of the array to the size of the array\&. "
+.ti -1c
+.RI "int \fBda_print\fP (\fBda_t\fP *\fBda\fP, FILE *fd, char *(*to_string)(void *))"
+.br
+.RI "Prints the array to the given file descriptior\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Dynamic Array interface\&. 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Berktug K\&. Ozkan (@spaceymonk) 
+.RE
+.PP
+\fBVersion\fP
+.RS 4
+0\&.1 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2023-02-26
+.RE
+.PP
+\fBCopyright\fP
+.RS 4
+Copyright (c) 2023 
+.RE
+.PP
+
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fBda\fP \fBda_t\fP"
+
+.PP
+A dynamic array structure\&. 
+.PP
+\fBAttention\fP
+.RS 4
+Do not modify this struct directly\&. Use the functions provided in this header\&.
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIarray\fP The array 
+.br
+\fIsize\fP The size of the array 
+.br
+\fIcapacity\fP The capacity of the array 
+.RE
+.PP
+
+.SH "Function Documentation"
+.PP 
+.SS "void** __da_sort (void ** array, size_t size, int(*)(void *, void *) cmp)"
+
+.PP
+Sort the array in place using the given comparison function\&. This function is used internally by \fCda_sort\fP and should not be used by the user\&. The user should use \fCda_sort\fP instead\&. This function quicksort algorithm\&. 
+.PP
+\fBSee also\fP
+.RS 4
+\fBda_sort\fP
+.RE
+.PP
+\fBAttention\fP
+.RS 4
+This function is not meant to be used by the user\&.
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIarray\fP The array to be sorted 
+.br
+\fIsize\fP The size of the array 
+.br
+\fIcmp\fP The comparison function as described in \fCda_sort\fP
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fCarray\fP as a sorted array 
+.RE
+.PP
+
+.SS "size_t da_binary_search (\fBda_t\fP * da, void * data, int(*)(void *, void *) cmp)"
+
+.PP
+Search for the given data in the array using binary search\&. 
+.PP
+\fBAttention\fP
+.RS 4
+The array must be sorted before using this function
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIda\fP The dynamic array 
+.br
+\fIdata\fP The data to be searched 
+.br
+\fIcmp\fP The comparison function, which should return 0 if the data is found, -1 if the data is less than the element in the array, and 1 if the data is greater than the element in the array
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+index of the data 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fI-1\fP If the data is not found 
+.RE
+.PP
+
+.SS "int da_clear (\fBda_t\fP * da, void(*)(void *) free_handler)"
+
+.PP
+Clears the array\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIda\fP The list to clear 
+.br
+\fIfree_handler\fP The function to free the data\&. This param can be NULL if the data does not need to be freed\&. But user should make sure that the data is freed before the list is freed\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+operation status 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fI0\fP If the operation was successful 
+.br
+\fI-1\fP If the operation failed 
+.RE
+.PP
+
+.SS "int da_free (\fBda_t\fP * da)"
+
+.PP
+Free the dynamic array\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIda\fP The dynamic array
+.RE
+.PP
+\fBAttention\fP
+.RS 4
+This function does not free the data in the array\&. It only frees the array itda\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+operation status 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fI0\fP If the operation was successful 
+.br
+\fI-1\fP If the operation failed 
+.RE
+.PP
+
+.SS "void* da_get (\fBda_t\fP * da, size_t index)"
+
+.PP
+Get the element at the given index\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIda\fP The dynamic array 
+.br
+\fIindex\fP The index of the element to be retrieved
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+data at the given index 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fINULL\fP If the operation failed 
+.RE
+.PP
+
+.SS "void* da_insert (\fBda_t\fP * da, size_t index, void * data)"
+
+.PP
+Inserts an element at the given index\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIda\fP The dynamic array 
+.br
+\fIindex\fP The index of the element to be inserted 
+.br
+\fIdata\fP The data to be inserted
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+data that was inserted 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fINULL\fP If the operation failed 
+.RE
+.PP
+
+.SS "\fBda_t\fP* da_new (size_t capacity)"
+
+.PP
+Create a dynamic array\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcapacity\fP Initial capacity of the array
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+A pointer to the dynamic array 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fINULL\fP If the allocation failed 
+.RE
+.PP
+
+.SS "int da_print (\fBda_t\fP * da, FILE * fd, char *(*)(void *) to_string)"
+
+.PP
+Prints the array to the given file descriptior\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIda\fP The dynamic array 
+.br
+\fIfd\fP The file descriptor 
+.br
+\fIto_string\fP The function to convert the data to string
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The status of the operation 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fI-1,If\fP an error occurred 
+.br
+\fI0,If\fP the list is printed successfully 
+.RE
+.PP
+
+.SS "void* da_push_back (\fBda_t\fP * da, void * data)"
+
+.PP
+Get the size of the capacity\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIda\fP The dynamic array
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+capacity of the array 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fI-1\fP If the operation failed
+.RE
+.PP
+Add an element to the end of the array
+.PP
+\fBParameters\fP
+.RS 4
+\fIda\fP The dynamic array 
+.br
+\fIdata\fP The data to be added
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+data that was added 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fINULL\fP If the operation failed 
+.RE
+.PP
+
+.SS "void* da_remove (\fBda_t\fP * da, size_t index)"
+
+.PP
+Remove the element at the given index\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIda\fP The dynamic array 
+.br
+\fIindex\fP The index of the element to be removed
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+data at the given index 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fINULL\fP If the operation failed 
+.RE
+.PP
+
+.SS "\fBda_t\fP* da_reverse (\fBda_t\fP * da)"
+
+.PP
+Reverses the array in place\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIda\fP The dynamic array
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fCda\fP as a reversed array 
+.RE
+.PP
+
+.SS "size_t da_search (\fBda_t\fP * da, void * data, int(*)(void *, void *) cmp)"
+
+.PP
+Search for the given data in the array\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIda\fP The dynamic array 
+.br
+\fIdata\fP The data to be searched 
+.br
+\fIcmp\fP The comparison function, which should return 0 if the data is found
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+index of the data 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fI-1\fP If the data is not found 
+.RE
+.PP
+
+.SS "void* da_set (\fBda_t\fP * da, size_t index, void * data)"
+
+.PP
+Updates the element at the given index\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIda\fP The dynamic array 
+.br
+\fIindex\fP The index of the element to be updated 
+.br
+\fIdata\fP The data to be updated
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+previous data at the given index 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fINULL\fP If the operation failed 
+.RE
+.PP
+
+.SS "\fBda_t\fP* da_shrink (\fBda_t\fP * da)"
+
+.PP
+Shrinks the capacity of the array to the size of the array\&. This function is useful when the array is not going to be used for a while and the memory can be freed\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIda\fP The dynamic array
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fCda\fP as a shrunk array 
+.RE
+.PP
+
+.SS "size_t da_size (\fBda_t\fP * da)"
+
+.PP
+Get the size of the array\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIda\fP The dynamic array
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+size of the array 
+.RE
+.PP
+\fBReturn values\fP
+.RS 4
+\fI-1\fP If the operation failed 
+.RE
+.PP
+
+.SS "\fBda_t\fP* da_sort (\fBda_t\fP * da, int(*)(void *, void *) cmp)"
+
+.PP
+Sort the array in place using the given comparison function\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIda\fP The dynamic array 
+.br
+\fIcmp\fP The comparison function, which should return -1 if the first element is less than the second, 0 if they are equal, and 1 if the first element is greater than the second
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function uses quicksort algorithm\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fCda\fP as a sorted array 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for My Project from the source code\&.

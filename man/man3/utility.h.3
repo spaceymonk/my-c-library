@@ -1,0 +1,73 @@
+.TH "include/utility.h" 3 "Thu Mar 2 2023" "My Project" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+include/utility.h \- Utility functions declarations\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBSWAP\fP(a,  b,  T)"
+.br
+.RI "Swaps the values of two variables\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Utility functions declarations\&. 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Berktug K\&. Ozkan (@spaceymonk) 
+.RE
+.PP
+\fBVersion\fP
+.RS 4
+0\&.1 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2023-02-28
+.RE
+.PP
+\fBCopyright\fP
+.RS 4
+Copyright (c) 2023 
+.RE
+.PP
+
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define SWAP(a, b, T)"
+\fBValue:\fP
+.PP
+.nf
+    do                \
+    {                 \
+        T temp = a;   \
+        a = b;        \
+        b = temp;     \
+    } while (0)
+.fi
+.PP
+Swaps the values of two variables\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIa\fP First value 
+.br
+\fIb\fP Second value 
+.br
+\fIT\fP Type of the values 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for My Project from the source code\&.

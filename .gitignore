@@ -1,4 +1,5 @@
 out/
+vgcore*
 
 # Visual Studio Code
 .vscode/
